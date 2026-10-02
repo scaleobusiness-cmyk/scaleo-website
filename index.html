@@ -1880,6 +1880,65 @@ a { color: inherit; text-decoration: none; }
     transform: none;
   }
 }
+   /* ==========================================================
+   LANGUAGE TOGGLE & RTL SUPPORT (ARABIC)
+   ========================================================== */
+
+/* زر التبديل في الناف بار */
+.lang-toggle-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.2);
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: .75rem;
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .3s ease;
+  margin-left: 1rem; /* مسافة قبل زر Start Validation */
+}
+.lang-toggle-btn:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+.lang-toggle-btn.active-lang {
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+}
+
+/* دعم الاتجاه من اليمين لليسار (Arabic) */
+[dir="rtl"] body {
+  text-align: right;
+  direction: rtl;
+}
+[dir="rtl"] .nav {
+  flex-direction: row-reverse; /* عكس ترتيب الناف بار */
+}
+[dir="rtl"] .hero-copy {
+  direction: rtl;
+}
+[dir="rtl"] .cta-row {
+  justify-content: flex-start; 
+}
+[dir="rtl"] .scaleo-footer-container {
+  direction: rtl;
+}
+[dir="rtl"] ul.scaleo-footer-links {
+  align-items: flex-end; /* محاذاة القوائم لليمين */
+}
+[dir="rtl"] .form-label {
+  text-align: right;
+}
+[dir="rtl"] .form-input, 
+[dir="rtl"] .form-select {
+  text-align: right;
+  direction: rtl;
+}
+/* إصلاح أيقونة السهم في القائمة المنسدلة للغة العربية */
+[dir="rtl"] .form-select {
+  background-position: left 1rem center;
+}
 </style>
 </head>
 <body>
@@ -1901,7 +1960,13 @@ a { color: inherit; text-decoration: none; }
     <a href="#community">Community</a>
     <a href="#academy">Academy</a>
   </nav>
-  <a href="#validation" class="nav-cta">Start Validation</a>
+  <div style="display:flex; align-items:center;">
+    <!-- زر التبديل -->
+    <button id="langToggleBtn" class="lang-toggle-btn" aria-label="Switch Language">AR</button>
+    <!-- رابط البدء -->
+    <a href="#validation" class="nav-cta">Start Validation</a>
+  </div>
+</header>
 </header>
 
 <!-- ========== HERO ========== -->
@@ -3177,6 +3242,305 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+   /* ==========================================================
+   TRANSLATION ENGINE (EN <-> AR EGYPTIAN STYLE)
+   ========================================================== */
+
+const translations = {
+  // --- NAVBAR & HERO ---
+  "We build the system behind your growth.": "بنبني النظام اللي ورا نمو شركتك.",
+  "SCALEO connects the intelligence, strategy, acquisition, sales, retention and growth channels that turn products, services and demand into measurable revenue.": "SCALEO بتربط بين الذكاء، الاستراتيجية، الاستقطاب، المبيعات، الاحتفاظ بالعملاء، وقنوات النمو عشان تحول المنتجات والخدمات والطلب إلى إيرادات ملموسة.",
+  "See How It Works": "شوف بيشتغل إزاي",
+  "Start Validation": "ابدأ التقييم",
+  "What We Do": "احنا بنعمل ايه",
+  "How It Works": "ازاي بنشتغل",
+  "Partnerships": "الشراكات",
+  "About": "عن الشركة",
+  "Careers": "وظائف",
+  "Community": "المجتمع",
+  "Academy": "الأكاديمية",
+  
+  // --- TRUSTED BY ---
+  "Trusted by businesses building what's next.": "موثوق من شركات بتبني المستقبل.",
+  
+  // --- CORE PRODUCT (SYSTEM) ---
+  "One system.<br>Every lever behind your growth.": "نظام واحد.<br>كل أدوات النمو في مكان واحد.",
+  "SCALEO connects intelligence, strategy, acquisition, sales, retention, and growth channels — turning fragmented activity into one connected engine.": "SCALEO بتجمع الذكاء والاستراتيجية والاستقطاب والمبيعات والاحتفاظ بقنوات النمو – وبتحول النشاط المتفرق لمحرك متصل واحد.",
+  
+  "Growth Intelligence": "ذكاء النمو",
+  "Understand what is actually driving growth before you spend a dollar.": "افهم اللي بيشغل النمو فعلاَ قبل ما تصرف جنيه.",
+  "Market Intel": "معلومات السوق",
+  "Customer Data": "بيانات العملاء",
+  "Attribution": "نسبة الفضل",
+  "Revenue Mapping": "خريطة الإيرادات",
+
+  "Offer & Sales Strategy": "استراتيجية العرض والمبيعات",
+  "Turn what you sell into something people desperately want to buy.": "حول اللي بتبيعه لحاجة الناس مستنية تشتريها.",
+  "Positioning": "التموضع",
+  "USP Definition": "تحديد ميزة البيع",
+  "Funnel Architecture": "هندسة مسار البيع",
+  "Pricing Logic": "منطق التسعير",
+
+  "Creative Growth": "النمو الإبداعي",
+  "Build, test, and iterate creative assets that stop the scroll.": "ابني واختبر وطور مواد إبداعية تخلي العميل يقف ويقرأ.",
+  "Creative Testing": "اختبار الأفكار",
+  "Ad Variations": "صيغ الإعلانات",
+  "Content Direction": "توجيه المحتوى",
+  "Optimization": "التحسين",
+
+  "Acquisition": "الاستقطاب",
+  "Capture qualified demand across Meta, TikTok, and Search.": "اجذب طلب مؤهل عبر ميتا، تيك توك، والبحث.",
+  "Meta Ads": "إعلانات ميتا",
+  "TikTok Ads": "إعلانات تيك توك",
+  "Google SEM": "جوجل سيرش",
+  "Traffic Scaling": "توسيع الزيارات",
+
+  "AI Sales Engine": "محرك مبيعات الذكاء الاصطناعي",
+  "Automate conversations and close deals while you sleep.": "أتمت المحادثات واقفل صفقات وانت نايم.",
+  "WhatsApp Bots": "روبوتات واتساب",
+  "Cart Recovery": "استرجاع السلة",
+  "Upsell Flows": "مسارات البيع الإضافي",
+  "Lead Qualification": "تأهيل العملاء المحتملين",
+
+  "Human Escalation": "التصعيد البشري",
+  "Seamless handoff to expert closers when high-value complexity arises.": "تسليم سلس لخبراء المبيعات لما الصفقة تكون معقدة وكبيرة.",
+  "Sales Team Ops": "تشغيل فريق المبيعات",
+  "Call Centers": "مراكز الاتصال",
+  "Complex Deals": "صفقات معقدة",
+  "Consultative Selling": "البيع الاستشاري",
+
+  "Retention & LTV": "الاحتفاظ والقيمة الدائمة",
+  "Maximize lifetime value through loyalty, win-backs, and community.": "عظم قيمة العميل مدى الحياة عبر الولاء واسترجاع العملاء والمجتمع.",
+  "Email/SMS CRM": "إيميل/رسائل SMS",
+  "Loyalty Programs": "برامج الولاء",
+  "Affiliates": "التسويق بالعمولة",
+  "B2B Channels": "قنوات الأعمال للأعمال",
+
+  "Everything works together.": "كل حاجة شغالة مع بعض.",
+  "Continuous feedback loops ensure that every sale informs the next strategy, creating compounding growth infrastructure.": "حلقات التغذية الراجعة المستمرة تضمن إن كل صفقة تعلمنا للاستراتيجية الجاية، فنبني أساس نمو تراكمي.",
+
+  // --- GROWTH JOURNEY ---
+  "From validation<br>to scale.": "من التحقق<br>للانطلاق.",
+  "SCALEO works through a continuous growth journey — understanding the business, identifying opportunities, activating systems, measuring results, and scaling what works.": "SCALEO بتشتغل عبر رحلة نمو مستمرة – فهم البيزنس، تحديد الفرص، تفعيل الأنظمة، قياس النتائج، وتوسيع اللي اشتغل.",
+  
+  "VALIDATE": "تحقق",
+  "Understand the business before deciding what it needs.": "افهم البيزنس قبل ما تقرر هو محتاج ايه.",
+  "Business Model": "نموذج العمل",
+  "Market": "السوق",
+  "Customers": "العملاء",
+  "Product": "المنتج",
+  "Revenue": "الإيراد",
+
+  "IDENTIFY": "حدد",
+  "Find where the biggest opportunities and revenue leaks actually are.": "لاقي فين أكبر الفرص وفين تسريب الإيراد فعلاَ.",
+  "Growth Opportunities": "فرص النمو",
+  "Customer Behavior": "سلوك العميل",
+  "Revenue Leaks": "تسريب الإيراد",
+  "Bottlenecks": "عنق الزجاجة",
+  "High-Impact Opps": "فرص عالية التأثير",
+
+  "BUILD": "ابني",
+  "Build the strategy and systems required to turn opportunity into growth.": "ابني الاستراتيجية والأنظمة اللازمة لتحويل الفرصة لنمو.",
+  "Offers": "العروض",
+  "Creative": "الإبداع",
+  "Sales Systems": "أنظمة المبيعات",
+
+  "ACTIVATE": "فعل",
+  "Put the right growth channels and systems into motion.": "شغل قنوات وأنظمة النمو الصح.",
+  "AI Sales": "مبيعات ذكية",
+  "Human Sales": "مبيعات بشرية",
+  "Retention": "الاحتفاظ",
+  "Growth Channels": "قنوات النمو",
+
+  "MEASURE": "قس",
+  "Connect activity to what matters: measurable business results.": "اربط النشاط بالنتائج المهمة: نتائج قابلة للقياس.",
+  "Conversion": "التحويل",
+  "Customer Value": "قيمة العميل",
+  "Channel Perf.": "أداء القناة",
+
+  "LEARN": "تعلم",
+  "Turn every result into intelligence that improves the next decision.": "حول كل نتيجة لذكاء يحسن القرار الجاي.",
+  "Results": "النتائج",
+  "Insights": "رؤى",
+  "Recommendations": "توصيات",
+  "Learning": "التعلم",
+
+  "SCALE": "وسع",
+  "Scale what proves it can create sustainable growth.": "وسع اللي أثبت إنه يقدر يخلق نمو مستدام.",
+  "What Works": "اللي شغال",
+  "Expansion": "التوسع",
+  "Efficiency": "الكفاءة",
+  "Compounding Growth": "نمو تراكمي",
+
+  // --- AI SALES SECTION ---
+  "AI that works<br>for your growth.": "ذكاء اصطناعي<br>بيخدم نموك.",
+  "One AI assistant trained around your business, products, offers, and sales process — helping customers, answering questions, following up, and turning more conversations into sales.": "مساعد ذكاء اصطناعي واحد متدرب على بيزنسك ومنتجاتك وعروضك وعملية البيع – بيساعد العملاء، بيرد على الأسئلة، بيتابع، وبيحول محادثات أكتر لصفقات.",
+  "One AI. Different jobs.<br>Built around your business.": "ذكاء واحد. مهام مختلفة.<br>مبني حول بيزنسك.",
+  "SCALEO Assistant": "مساعد SCALEO",
+  "Online • Ready to sell": "متصل • جاهز للبيع",
+
+  // --- GROWTH MODELS ---
+  "Choose how you grow.": "اختار طريقة نموك.",
+  "Every business has a different growth challenge. SCALEO adapts the system around what your business actually needs.": "كل بيزنس ليه تحدي نمو مختلف. SCALEO بتكيف النظام حسب احتياج بيزنسك الحقيقي.",
+  
+  "GROW": "نمو",
+  "Focused growth, built around a specific need. Ideal for businesses that require SCALEO to solve or improve one critical area of their funnel rather than operating across the entire ecosystem.": "نمو مركّز مبني حول احتياج معين. مثالي للشركات اللي محتاجة SCALEO تحل أو تحسن منطقة حرجة واحدة في مسار البيع بدل التشغيل على المنظومة كلها.",
+  "Explore Partnership": "استكشف الشراكة",
+  "Discuss Requirements": "ناقش المتطلبات",
+
+  "SCALE": "انطلاقة",
+  "A connected growth system for businesses ready to scale. This is a broader engagement where SCALEO connects multiple growth levers into one unified infrastructure, ensuring every channel feeds into the next.": "نظام نمو متصل للشركات الجاهزة للتوسع. ده ارتباط أوسع حيث تربط SCALEO عدة أدوات نمو في بنية تحتية موحدة، لضمان إن كل قناة تغذي اللي بعدها.",
+  "Full Retention Loop": "حلقة احتفاظ كاملة",
+
+  "CUSTOM": "مخصص",
+  "Built around complex growth requirements. For enterprises or unique business models whose needs don't fit neatly into standard engagement frameworks. We design bespoke integrations and specialized infrastructure.": "مبني حول متطلبات نمو معقدة. للمؤسسات أو نماذج الأعمال الفريدة اللي احتياجاتها مش بتدخل في الأطباق المعيارية. بنصمم تكاملات خاصة وبنية تحتية متخصصة.",
+  "Custom Systems": "أنظمة مخصصة",
+  "Complex Integrations": "تكاملات معقدة",
+  "Specialized Infra": "بنية متخصصة",
+  "Bespoke Solutions": "حلول مفصلة",
+
+  "BE A PARTNER": "كن شريكاَ",
+  "Build with SCALEO. Share the growth. This is not an affiliate program. SCALEO may choose to work with selected high-potential businesses as a true growth partner — contributing operational resources and infrastructure in exchange for an agreed share of the revenue generated together.": "ابني مع SCALEO. شارك النمو. دي مش برنامج عمولات. ممكن تختار SCALEO العمل مع شركات مختارة ذات إمكانات عالية كشريك نمو حقيقي – بتقديم موارد تشغيلية وبنية تحتية مقابل نسبة متفق عليها من الإيراد الناتج معاَ.",
+  "Growth Partnership": "شراكة نمو",
+  "Operational Resources": "موارد تشغيلية",
+  "Shared Upside": "ربح مشترك",
+  "Revenue Share": "حصة إيرادات",
+
+  // --- FINAL CTA ---
+  "Ready to build your growth system?": "جاهز تبني نظام نموك؟",
+  "Tell us where your business is today. We'll identify what it needs to grow — and build the right system around it.": "قولنا بيزنسك فين النهاردة. هنجيب اللي محتاجه عشان ينمو – ونبني النظام الصح حواليه.",
+  "No fixed package. No unnecessary complexity. Just the system your business needs.": "مفيش باكدج ثابت. مفيش تعقيد بلا داعي. بس النظام اللي بيزنسك محتاجه.",
+  "Explore SCALEO": "استكشف SCALEO",
+
+  // --- COMING SOON ---
+  "CAREERS": "وظائف",
+  "Build the team behind what's next.": "ابني الفريق اللي وراء القادم.",
+  "We're building SCALEO around people who think, build, execute, and learn.": "احنا بنبني SCALEO حول ناس بتفكر، تبني، تنفذ، وتتعلم.",
+  "Coming Soon": "قريباَ",
+
+  "COMMUNITY": "المجتمع",
+  "Where builders connect.": "حيث يلتقي الصانعون.",
+  "A community for founders, operators, growth thinkers, and people building what comes next.": "مجتمع للمؤسسين، المشغلين، مفكري النمو، والناس اللي بتبني المستقبل.",
+
+  "ACADEMY": "الأكاديمية",
+  "Learn how growth is built.": "اتعلم ازاي يتبنى النمو.",
+  "Practical knowledge around growth, sales, strategy, systems, and building modern businesses.": "معرفة عملية حول النمو، المبيعات، الاستراتيجية، الأنظمة، وبناء الشركات الحديثة.",
+
+  // --- VALIDATION FORM ---
+  "START VALIDATION": "ابدأ التقييم",
+  "Let's understand your business.": "خلينا نفهم بيزنسك.",
+  "Tell us a little about your business. We'll use this information as the starting point for understanding where growth opportunities may exist.": "احكيلنا شوية عن بيزنسك. هنستخدم المعلومات دي كنقطة بداية لفهم فين فرص النمو ممكن تكون موجودة.",
+  "Your Name": "اسمك",
+  "Enter your full name": "اكتب اسمك بالكامل",
+  "Phone / WhatsApp": "تليفون / واتساب",
+  "+20 ...": "+20 ...",
+  "Business Instagram": "انستجرام الشركة",
+  "@yourbusiness": "@شركتك",
+  "Business Category": "نشاط الشركة",
+  "Select category": "اختر النشاط",
+  "E-commerce": "تجارة إلكترونية",
+  "Fashion": "أزياء",
+  "Beauty": "جمال",
+  "Food & Beverage": "أطعمة ومشروبات",
+  "Services": "خدمات",
+  "SaaS / Technology": "برمجيات / تقنية",
+  "Education": "تعليم",
+  "Healthcare": "صحة",
+  "Other": "أخرى",
+  "Validation started.": "بدأ التقييم.",
+  "We've received your business information. This is the starting point for understanding where your growth opportunities may exist.": "وصلتنا معلومات بيزنسك. دي نقطة البداية لفهم فين فرص نموك ممكن تكون.",
+
+  // --- FOOTER ---
+  "System": "النظام",
+  "Core Product": "المنتج الأساسي",
+  "Growth Journey": "رحلة النمو",
+  "AI Growth": "نمو الذكاء",
+  "Growth Models": "نماذج النمو",
+  "Company": "الشركة",
+  "Partnership": "شراكة",
+  "Connect": "تواصل معنا",
+  "LinkedIn": "لينكدإن",
+  "Instagram": "انستجرام",
+  "Facebook": "فيسبوك",
+  "Email": "بريد إلكتروني",
+  "© 2026 SCALEO. All rights reserved.": "© 2026 SCALEO. جميع الحقوق محفوظة.",
+  "Privacy Policy": "سياسة الخصوصية",
+  "Terms of Service": "شروط الخدمة"
+};
+
+let currentLang = 'en'; // الافتراضي إنجليزي
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('langToggleBtn');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    toggleLanguage();
+  });
+});
+
+function toggleLanguage() {
+  const htmlElement = document.documentElement;
+  
+  if (currentLang === 'en') {
+    // Switch to Arabic
+    currentLang = 'ar';
+    htmlElement.setAttribute('dir', 'rtl');
+    htmlElement.setAttribute('lang', 'ar');
+    btn.textContent = 'EN';
+    btn.classList.add('active-lang');
+    applyTranslation(translations);
+  } else {
+    // Switch to English
+    currentLang = 'en';
+    htmlElement.setAttribute('dir', 'ltr');
+    htmlElement.setAttribute('lang', 'en');
+    btn.textContent = 'AR';
+    btn.classList.remove('active-lang');
+    location.reload(); // أسهل طريقة لإرجاع الإنجليزية بدون أخطاء تخزين
+  }
+}
+
+function applyTranslation(dict) {
+  // نبحث في كل عناصر النص في الصفحة
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+  let node;
+  
+  while (node = walker.nextNode()) {
+    const originalText = node.nodeValue.trim();
+    
+    // لو النص موجود في القاموس
+    if (dict[originalText]) {
+      node.nodeValue = dict[originalText];
+    }
+  }
+  
+  // التعامل مع العناصر اللي فيها HTML داخلي (مثل العناوين اللي فيها <em>)
+  updateSpecificElements(dict);
+}
+
+function updateSpecificElements(dict) {
+  // أمثلة لعناصر حساسة قد تحتاج معالجة خاصة
+  const h1Hero = document.querySelector('.hero h1');
+  if(h1Hero && currentLang === 'ar') {
+     h1Hero.innerHTML = "بنبني النظام اللي ورا <em>نمو شركتك.</em>";
+  } 
+  
+  const cpIntroH1 = document.querySelector('.cp-intro h1');
+  if(cpIntroH1 && currentLang === 'ar') {
+      cpIntroH1.innerHTML = "نظام واحد.<br>كل أدوات النمو في مكان واحد.";
+  } 
+  
+  const aiTagline = document.querySelector('.scaleo-ai-tagline');
+  if(aiTagline && currentLang === 'ar') {
+      aiTagline.innerHTML = "ذكاء واحد. مهام مختلفة.<br>مبني حول بيزنسك.";
+  } 
+  
+  const gjLeftH2 = document.querySelector('.scaleo-gj-left h2');
+  if(gjLeftH2 && currentLang === 'ar') {
+      gjLeftH2.innerHTML = "من التحقق<br>للانطلاق.";
+  }
+}
 </script>
 </body>
 </html>
