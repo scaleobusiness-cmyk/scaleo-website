@@ -1,0 +1,3182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCALEO | Growth & Revenue Infrastructure</title>
+<meta name="description" content="SCALEO builds and operates the systems behind growth and revenue for brands and businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================
+   1. DESIGN TOKENS  (taken directly from the SCALEO logo)
+   ========================================================== */
+:root {
+  --red: #FF0000;                 /* logo "o" red */
+  --red-soft: rgba(255,0,0,.35);
+  --red-faint: rgba(255,0,0,.12);
+  --charcoal: #1F1F1F;            /* logo letter colour */
+  --black: #070707;               /* page background */
+  --white: #FFFFFF;
+  --text: #F5F5F5;
+  --muted: #A3A3A3;
+  --line: rgba(255,255,255,.10);
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --pad: clamp(1.25rem, 4vw, 4rem);
+  --nav-h: 76px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font); color: var(--text); background: var(--black);
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* Wordmark: recreates the logo (lowercase, red "o", dot).
+   Replace with <img src="logo.svg"> once a transparent logo file exists. */
+.wordmark { font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--white); }
+.wordmark i { font-style: normal; color: var(--red); }
+
+/* ==========================================================
+   2. NAVBAR
+   ========================================================== */
+.nav {
+  position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad);
+  background: linear-gradient(#070707 40%, rgba(7,7,7,0));
+}
+.nav .wordmark { font-size: 1.9rem; }
+.nav-links { display: flex; gap: 1.5rem; font-size: .85rem; color: var(--muted); }
+.nav-links a { transition: color .25s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  font-size: .85rem; font-weight: 600; padding: .65rem 1.3rem; border-radius: 999px;
+  border: 1px solid var(--red); color: var(--white); transition: background .25s;
+}
+.nav-cta:hover { background: var(--red); }
+
+/* ==========================================================
+   3. HERO LAYOUT
+   ========================================================== */
+.hero {
+  position: relative; min-height: 100vh; padding: calc(var(--nav-h) + 2rem) var(--pad) 3rem;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center; gap: clamp(1.5rem, 4vw, 4rem);
+  background: radial-gradient(60% 70% at 72% 50%, var(--red-faint), transparent 70%);
+}
+.hero-copy { max-width: 36rem; }
+.hero h1 {
+  font-size: clamp(2.5rem, 5.2vw, 4.8rem); font-weight: 800; line-height: 1.02;
+  letter-spacing: -.035em; text-transform: uppercase;
+}
+.hero h1 em { font-style: normal; color: var(--red); }
+.hero-copy p { margin-top: 1.6rem; max-width: 30rem; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+.cta-row { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.2rem; }
+.btn {
+  font: 600 .95rem var(--font); padding: .95rem 1.7rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: transparent; color: var(--white);
+  transition: transform .25s, background .25s, border-color .25s;
+}
+.btn:hover { transform: translateY(-2px); border-color: var(--white); }
+.btn-primary { background: var(--red); border-color: var(--red); box-shadow: 0 10px 40px -10px var(--red); }
+.btn-primary:hover { border-color: var(--red); background: #e60000; }
+
+/* ==========================================================
+   4. INTELLIGENCE CORE VISUAL (REDESIGNED)
+   ========================================================== */
+
+.stage {
+  position: relative; 
+  width: min(100%, 640px); 
+  aspect-ratio: 1; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+/* The Central Glowing Ring */
+.core-ring {
+  position: relative;
+  z-index: 2;
+  width: 35%; /* Size of the central circle */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--black);
+  border: 2px solid var(--red);
+  box-shadow: 0 0 40px rgba(255,0,0,.2), inset 0 0 20px rgba(255,0,0,.1);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  animation: breatheCore 4s ease-in-out infinite;
+}
+
+/* Subtle Breathing Effect for the Core */
+@keyframes breatheCore {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,0,0,.15); }
+  50% { transform: scale(1.02); box-shadow: 0 0 50px rgba(255,0,0,.25); }
+}
+
+.core-content .wordmark { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+.core-content small { 
+  display: block; 
+  margin-top: .5rem; 
+  font-size: .8rem; 
+  color: var(--muted); 
+  letter-spacing: .05em; 
+  text-transform: uppercase;
+}
+
+/* Layer for Floating Messages */
+.insights-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Allows clicking through if needed later */
+  z-index: 3;
+}
+
+/* Individual Insight Bubble */
+.insight-bubble {
+  position: absolute;
+  max-width: 280px;
+  padding: 1rem 1.5rem;
+  background: rgba(20, 20, 20, .6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-left: 2px solid var(--red);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: .95rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(10px) scale(.95);
+  transition: all .8s cubic-bezier(.2,.8,.2,1);
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  white-space: normal;
+}
+
+/* Visible State */
+.insight-bubble.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Fade Out State */
+.insight-bubble.fading-out {
+  opacity: 0;
+  transform: translateY(-10px) scale(.95);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .core-ring { width: 45%; } /* Larger core on mobile for visibility */
+  .insight-bubble { 
+    max-width: 220px; 
+    font-size: .85rem; 
+    padding: .8rem 1.2rem;
+  }
+}
+
+/* ==========================================================
+   5. RESPONSIVE
+   ========================================================== */
+@media (max-width: 980px) {
+  .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 1.5rem); }
+  .hero-copy { max-width: 40rem; }
+  .nav-links { display: none; }   /* future: add a mobile menu */
+}
+@media (max-width: 560px) {
+  .cap p { display: none; }       /* names only on small screens for legibility */
+  .cap { width: 30cqw; }
+  .cta-row .btn { flex: 1 1 100%; text-align: center; }
+}
+
+/* ==========================================================
+   6. ENTRANCE (single restrained sequence) + REDUCED MOTION
+   ========================================================== */
+.reveal { opacity: 0; transform: translateY(14px); animation: rise .9s ease forwards; animation-delay: var(--r, 0s); }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .core, .cap-card, .lines line, .reveal { animation: none; }
+  .reveal { opacity: 1; transform: none; }
+  .cap { transition: none; }
+}
+/* ==========================================================
+   7. TRUSTED BY SECTION
+   ========================================================== */
+.trusted-by {
+  padding: clamp(2rem, 5vw, 4rem) var(--pad);
+  text-align: center;
+  border-top: 1px solid var(--line); /* فصل ناعم عن الهيرو */
+}
+
+.trusted-label {
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.client-wrapper {
+  display: inline-block;
+  transition: all .3s ease;
+  opacity: .6; /* بهتان بسيط للوقار */
+}
+
+.client-wrapper:hover {
+  opacity: 1;
+  transform: scale(1.02); /* تكبير طفيف جداً */
+  filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.3)); /* توهج أزرق خفيف حسب براند NVIEX */
+}
+
+/* تصميم اللوجو كنص لأننا لا نملك ملف SVG حالياً */
+.nviex-logo-text {
+  font-family: var(--font);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.nviex-logo-text span.blue-part {
+  color: #4A9EFF; /* اللون الأزرق المميز لبراند NVIEX */
+}
+/* ==========================================================
+   8. CORE PRODUCT SECTION (SCROLL-DRIVEN STORY)
+   ========================================================== */
+
+/* Container for the whole story */
+.core-product {
+  position: relative;
+  background: var(--black);
+  padding-top: 4rem; /* Space from Trusted By */
+}
+
+/* --- Part 1 & 2: The Sticky Visual Stage --- */
+.cp-stage-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+  /* Subtle radial gradient to focus attention in center */
+  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, var(--black) 60%);
+}
+
+/* The Central System Graphic */
+.system-core {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Center Ring */
+.sys-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 0 40px rgba(255,0,0,.05);
+  transition: all .6s ease;
+}
+.sys-ring::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,.05);
+  animation: spinSlow 20s linear infinite;
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+
+/* Inner Brand Label */
+.sys-center-label {
+  text-align: center;
+  z-index: 2;
+}
+.sys-center-label h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--white);
+  margin-bottom: .2rem;
+}
+.sys-center-label span {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+}
+
+/* Orbiting Nodes (Data -> Revenue) */
+.orbit-node {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: auto;
+  transform-origin: 0 0;
+  opacity: .3;
+  transition: opacity .5s ease, filter .5s ease, transform .5s ease;
+  pointer-events: none;
+}
+.node-dot {
+  width: 8px; height: 8px;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--red);
+}
+.node-line {
+  position: absolute;
+  top: 4px; left: 12px;
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, var(--white), transparent);
+  opacity: .5;
+}
+.node-text {
+  position: absolute;
+  top: -6px; left: 75px;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+/* Active State for Nodes */
+.orbit-node.active {
+  opacity: 1;
+  z-index: 10;
+}
+.orbit-node.active .node-dot {
+  background: var(--red);
+  box-shadow: 0 0 20px var(--red);
+  transform: scale(1.5);
+}
+.orbit-node.active .node-text {
+  color: var(--white);
+}
+
+/* Connection Lines SVG Layer */
+.connections-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.conn-path {
+  fill: none;
+  stroke: rgba(255,255,255,.1);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  transition: stroke .5s ease, opacity .5s ease;
+}
+.conn-path.active {
+  stroke: var(--red);
+  opacity: 1;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 4px var(--red));
+}
+
+
+/* --- Scrolling Content Overlay --- */
+.cp-scroll-track {
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* Let clicks pass through to visual if needed */
+}
+
+.cp-intro {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--pad);
+  pointer-events: auto;
+}
+.cp-intro h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+.cp-intro p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Capability Blocks */
+.cap-block {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--pad);
+  pointer-events: auto;
+}
+
+/* Alternating Layout */
+.cap-block:nth-child(even) { justify-content: flex-end; }
+.cap-block:nth-child(odd) { justify-content: flex-start; }
+
+.cap-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(20, 20, 20, .6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 2.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s cubic-bezier(.2, .8, .2, 1);
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+}
+
+.cap-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cap-num {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: .1em;
+  margin-bottom: 1rem;
+  display: block;
+}
+.cap-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: .8rem;
+  line-height: 1.2;
+}
+.cap-desc {
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.cap-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.cap-list li {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255,255,255,.05);
+  padding: .4rem .8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+/* --- Part 3: The Loop Finale --- */
+.loop-finale {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 var(--pad);
+  background: linear-gradient(to bottom, transparent, var(--black) 20%);
+  position: relative;
+  z-index: 2;
+}
+.loop-headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  margin-bottom: 2rem;
+  /* الخلفية المتدرجة */
+  background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
+  /* خاصيات القص لضمان العمل في جميع المتصفحات الحديثة والقديمة */
+  -webkit-background-clip: text;
+  background-clip: text; /* <--- أضفنا هذه السطر لحل مشكلة التحذير */
+   color: transparent;    
+}
+.loop-graphic {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  margin-bottom: 3rem;
+}
+.loop-step {
+  position: absolute;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  opacity: 0;
+  transform: scale(.8);
+  transition: all .6s ease;
+}
+.loop-step.show { opacity: 1; transform: scale(1); }
+.loop-arrow {
+  position: absolute;
+  width: 100%; height: 100%;
+  border: 2px solid rgba(255,255,255,.1);
+  border-radius: 50%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* Mask helper */
+  mask-image: conic-gradient(from 0deg, black 0%, transparent 100%);
+  animation: loopRotate 4s linear infinite;
+}
+@keyframes loopRotate { to { transform: rotate(360deg); } }
+
+/* Responsive Adjustments */
+@media (max-width: 980px) {
+  .cp-stage-container { height: 60vh; top: 10vh; } /* Less sticky height on mobile/tablet */
+  .system-core { width: 240px; height: 240px; }
+  .cap-block { justify-content: center !important; padding-top: 2rem; padding-bottom: 2rem; }
+  .cap-card { max-width: 100%; }
+  .orbit-node .node-text { display: none; } /* Hide labels on small screens to avoid clutter */
+}
+@media (prefers-reduced-motion: reduce) {
+  .sys-ring::after, .loop-arrow { animation: none; }
+  .cap-card { transition: opacity .3s ease; transform: none; }
+}
+/* ==========================================================
+   9. GROWTH JOURNEY SECTION (SINGLE CONTAINER AUTO-ROTATE)
+   ========================================================== */
+
+.scaleo-gj-section {
+  padding: clamp(4rem, 8vw, 8rem) var(--pad);
+  background: var(--black);
+  position: relative;
+}
+
+.scaleo-gj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Left Text | Right Container */
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center; /* Vertically center both sides */
+}
+
+/* --- LEFT SIDE: STATIC TEXT --- */
+.scaleo-gj-left h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.scaleo-gj-left p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+/* --- RIGHT SIDE: THE SINGLE CONTAINER --- */
+.scaleo-gj-container {
+  width: 100%;
+  min-height: 380px; /* Fixed height to prevent jumping */
+  background: #0a0a0a; /* Slightly lighter than pure black for depth */
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+
+/* Subtle Grid Background inside container */
+.scaleo-gj-bg-pattern {
+  position: absolute; inset: 0; opacity: .03; pointer-events: none;
+  background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0);
+  background-size: 30px 30px;
+}
+
+/* Content Wrapper for Animation */
+.scaleo-gj-content-wrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  transition: opacity .4s ease, transform .4s cubic-bezier(.2,.8,.2,1), filter .4s ease;
+}
+
+/* States for JS Control */
+.scaleo-gj-content-wrapper.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  filter: blur(4px);
+}
+.scaleo-gj-content-wrapper.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Typography Inside Container */
+.scaleo-gj-stage-num {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: .15em;
+  margin-bottom: 1rem;
+  display: block;
+}
+.scaleo-gj-stage-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -.02em;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.scaleo-gj-stage-desc {
+  font-size: 1.1rem;
+  color: var(--text);
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+/* Pills / Tags */
+.scaleo-gj-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  justify-content: center;
+}
+.scaleo-gj-pill {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  padding: .5rem 1.2rem;
+  border-radius: 99px;
+  transition: all .3s ease;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .scaleo-gj-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .scaleo-gj-left {
+    text-align: center;
+  }
+  .scaleo-gj-left p {
+    margin: 0 auto;
+  }
+  .scaleo-gj-container {
+    min-height: 320px;
+    padding: 2rem;
+  }
+  .scaleo-gj-stage-title {
+    font-size: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-gj-content-wrapper {
+    transition: none !important;
+    filter: none !important;
+  }
+}
+/* ==========================================================
+   10. AI GROWTH / SALES SECTION (LIVE DEMO INTERFACE)
+   Scoped with .scaleo-ai-* prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-ai-section {
+  padding: clamp(4rem, 8vw, 8rem) var(--pad);
+  background: var(--black);
+  position: relative;
+  overflow: hidden; /* Prevents any glow bleeding out */
+}
+
+.scaleo-ai-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr; /* Left Text | Right Interface */
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* --- LEFT SIDE: STATIC COPY --- */
+.scaleo-ai-copy h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.scaleo-ai-copy p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 450px;
+  margin-bottom: 2rem;
+}
+.scaleo-ai-tagline {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  border-left: 2px solid var(--red);
+  padding-left: 1rem;
+}
+
+/* --- RIGHT SIDE: THE LIVE CHAT INTERFACE --- */
+.scaleo-ai-interface-wrapper {
+  width: 100%;
+  height: 600px; /* Fixed height for stability */
+  perspective: 1000px; /* For subtle 3D tilt if needed later */
+}
+
+.scaleo-ai-chat-window {
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.02);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .6s ease;
+}
+
+/* Header of the Chat Window */
+.scaleo-ai-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,.02);
+}
+.scaleo-ai-brand {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+.scaleo-ai-logo-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--red);
+  animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+.scaleo-ai-status-text {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--white);
+}
+.scaleo-ai-status-sub {
+  font-size: .75rem;
+  color: var(--muted);
+  display: block;
+  margin-top: .2rem;
+}
+
+/* Messages Area */
+.scaleo-ai-messages-area {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+.scaleo-ai-messages-area::-webkit-scrollbar { display: none; } /* Hide Chrome/Safari */
+
+/* Message Bubbles */
+.scaleo-ai-msg-row {
+  display: flex;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .5s cubic-bezier(.2,.8,.2,1);
+}
+.scaleo-ai-msg-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Customer Message (Left aligned usually, but let's put customer on left, AI on right or vice versa? 
+   Standard UX: User = Right, Bot = Left. Let's stick to standard premium SaaS look.) */
+   
+.scaleo-ai-msg-user {
+  justify-content: flex-end;
+}
+.scaleo-ai-msg-bot {
+  justify-content: flex-start;
+}
+
+.scaleo-ai-bubble {
+  max-width: 80%;
+  padding: 1rem 1.5rem;
+  border-radius: 18px;
+  font-size: .95rem;
+  line-height: 1.5;
+  position: relative;
+}
+
+/* User Bubble Style */
+.scaleo-ai-msg-user .scaleo-ai-bubble {
+  background: var(--charcoal);
+  color: var(--text);
+  border-bottom-right-radius: 4px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+/* Bot Bubble Style */
+.scaleo-ai-msg-bot .scaleo-ai-bubble {
+  background: rgba(255,0,0,.05); /* Very faint red tint for SCALEO identity */
+  border: 1px solid rgba(255,0,0,.15);
+  color: var(--white);
+  border-bottom-left-radius: 4px;
+}
+
+/* Typing Indicator */
+.scaleo-ai-typing {
+  display: flex;
+  gap: 4px;
+  padding: 1rem 1.5rem;
+  background: rgba(255,255,255,.03);
+  border-radius: 18px;
+  width: fit-content;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.scaleo-ai-typing.active { opacity: 1; }
+.scaleo-ai-typing span {
+  width: 6px; height: 6px;
+  background: var(--muted);
+  border-radius: 50%;
+  animation: bounceTyping 1.4s infinite ease-in-out both;
+}
+.scaleo-ai-typing span:nth-child(1) { animation-delay: -0.32s; }
+.scaleo-ai-typing span:nth-child(2) { animation-delay: -0.16s; }
+@keyframes bounceTyping {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Action Buttons inside Chat */
+.scaleo-ai-actions {
+  display: flex;
+  gap: .8rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.scaleo-ai-action-btn {
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  border-radius: 99px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.1);
+  color: var(--muted);
+  cursor: default; /* Non-interactive demo */
+  transition: all .3s;
+}
+.scaleo-ai-action-btn.highlight {
+  border-color: var(--red);
+  color: var(--white);
+  background: rgba(255,0,0,.1);
+}
+
+/* Scenario Transition Overlay (Optional blur/fade between big scenarios) */
+.scaleo-ai-scenario-overlay {
+  position: absolute; inset: 0; z-index: 10;
+  background: #0a0a0a;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.scaleo-ai-scenario-overlay.active { opacity: 1; }
+
+/* Responsive */
+@media (max-width: 980px) {
+  .scaleo-ai-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .scaleo-ai-copy { text-align: center; }
+  .scaleo-ai-copy p { margin: 0 auto 2rem; }
+  .scaleo-ai-interface-wrapper { height: 500px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-ai-msg-row { transition: none; opacity: 1; transform: none; }
+  .scaleo-ai-typing span { animation: none; }
+}
+/* ==========================================================
+   11. GROWTH MODELS SECTION (INTERACTIVE ACCORDION)
+   Scoped with .scaleo-gm-* prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-gm-section {
+  padding: clamp(4rem, 8vw, 8rem) var(--pad);
+  background: var(--black);
+  position: relative;
+}
+
+.scaleo-gm-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 700px;
+  margin-inline: auto;
+}
+.scaleo-gm-header h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.scaleo-gm-header p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Container for the Accordion Stack */
+.scaleo-gm-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Individual Model Card */
+.scaleo-gm-card {
+  background: #0a0a0a; /* Slightly lighter than black for depth */
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all .4s cubic-bezier(.2,.8,.2,1);
+  cursor: pointer;
+  position: relative;
+}
+
+/* Hover Effect on Closed Cards */
+.scaleo-gm-card:hover:not(.open) {
+  border-color: rgba(255,255,255,.15);
+  background: #0f0f0f;
+}
+
+/* Active/Open State Styling */
+.scaleo-gm-card.open {
+  border-color: var(--red);
+  box-shadow: 0 10px 30px rgba(255,0,0,.05);
+  background: #0d0d0d;
+}
+
+/* --- Header Row (Always Visible) --- */
+.scaleo-gm-header-row {
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.scaleo-gm-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.scaleo-gm-num {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .1em;
+  min-width: 2ch;
+}
+.scaleo-gm-card.open .scaleo-gm-num {
+  color: var(--red);
+}
+
+.scaleo-gm-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -.02em;
+}
+
+.scaleo-gm-short-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-left: auto;
+  margin-right: 1.5rem;
+  display: none; /* Hidden by default, shown via JS or media query if needed, but usually we keep header clean */
+}
+
+/* Expand/Collapse Icon (+ / -) */
+.scaleo-gm-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.scaleo-gm-icon::before,
+.scaleo-gm-icon::after {
+  content: '';
+  position: absolute;
+  background: var(--muted);
+  transition: all .3s ease;
+}
+.scaleo-gm-icon::before { /* Horizontal bar */
+  width: 14px;
+  height: 2px;
+}
+.scaleo-gm-icon::after { /* Vertical bar */
+  width: 2px;
+  height: 14px;
+}
+
+/* Transform icon when open */
+.scaleo-gm-card.open .scaleo-gm-icon::before {
+  background: var(--red);
+}
+.scaleo-gm-card.open .scaleo-gm-icon::after {
+  transform: rotate(90deg);
+  opacity: 0; /* Hide vertical bar to make it look like minus */
+}
+
+/* --- Content Area (Hidden by Default) --- */
+.scaleo-gm-content-wrapper {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
+}
+
+.scaleo-gm-card.open .scaleo-gm-content-wrapper {
+  max-height: 500px; /* Arbitrary large enough value */
+  opacity: 1;
+}
+
+.scaleo-gm-content-inner {
+  padding: 0 2rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .scaleo-gm-content-inner {
+    grid-template-columns: 1.5fr 1fr; /* Description Left | Features Right */
+    gap: 3rem;
+  }
+}
+
+/* Detailed Description Text */
+.scaleo-gm-detail-text {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Feature Pills/List */
+.scaleo-gm-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+.scaleo-gm-feature-pill {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: .5rem 1rem;
+  border-radius: 99px;
+  transition: all .3s ease;
+}
+.scaleo-gm-card.open .scaleo-gm-feature-pill {
+  border-color: rgba(255,255,255,.15);
+  color: var(--text);
+}
+
+/* CTA Button inside Card */
+.scaleo-gm-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--white);
+  text-decoration: none;
+  transition: color .3s ease;
+}
+.scaleo-gm-cta-btn:hover {
+  color: var(--red);
+}
+.scaleo-gm-cta-arrow {
+  transition: transform .3s ease;
+}
+.scaleo-gm-cta-btn:hover .scaleo-gm-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .scaleo-gm-header-row {
+    padding: 1.2rem 1.5rem;
+  }
+  .scaleo-gm-content-inner {
+    padding: 0 1.5rem 1.5rem;
+  }
+  .scaleo-gm-title {
+    font-size: 1.1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-gm-card,
+  .scaleo-gm-content-wrapper,
+  .scaleo-gm-icon::before,
+  .scaleo-gm-icon::after {
+    transition: none !important;
+  }
+}
+/* ==========================================================
+   12. FINAL CTA SECTION (CONVERSION MOMENT)
+   Scoped with .scaleo-final-cta prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-final-cta {
+  position: relative;
+  padding: clamp(6rem, 10vw, 10rem) var(--pad);
+  background: var(--black);
+  overflow: hidden; /* Contains the subtle glow */
+  text-align: center;
+}
+
+/* Subtle Background Glow Effect */
+.scaleo-final-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 80vw; height: 80vh;
+  max-width: 800px; max-height: 600px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,0,0,.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content Wrapper for Z-Index */
+.scaleo-final-cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Headline */
+.scaleo-final-headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ctaRevealUp .8s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: .1s;
+}
+
+/* Supporting Text */
+.scaleo-final-subtext {
+  font-size: 1.15rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 550px;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ctaRevealUp .8s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: .25s;
+}
+
+/* Buttons Container */
+.scaleo-final-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ctaRevealUp .8s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: .4s;
+}
+
+/* Primary Button */
+.scaleo-btn-primary-lg {
+  font: 600 1.05rem var(--font);
+  padding: 1.1rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+  transition: all .3s ease;
+  box-shadow: 0 10px 30px -10px var(--red-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.scaleo-btn-primary-lg:hover {
+  background: #e60000;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px -10px var(--red-soft);
+}
+
+/* Secondary Button */
+.scaleo-btn-secondary-lg {
+  font: 600 1.05rem var(--font);
+  padding: 1.1rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,.15);
+  background: transparent;
+  color: var(--white);
+  transition: all .3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.scaleo-btn-secondary-lg:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,.05);
+  transform: translateY(-2px);
+}
+
+/* Small Footer Note */
+.scaleo-final-note {
+  font-size: .85rem;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: ctaRevealUp .8s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay: .55s;
+}
+
+/* Keyframes for Staggered Entrance */
+@keyframes ctaRevealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .scaleo-final-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .scaleo-btn-primary-lg,
+  .scaleo-btn-secondary-lg {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-final-headline,
+  .scaleo-final-subtext,
+  .scaleo-final-buttons,
+  .scaleo-final-note {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* ==========================================================
+   13. FOOTER SECTION (FINAL SIGNATURE)
+   Scoped with .scaleo-footer prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-footer {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,.05); /* Subtle separation from CTA */
+  padding: clamp(4rem, 8vw, 6rem) var(--pad) 2rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.scaleo-footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr; /* Brand | System | Company | Connect */
+  gap: 3rem;
+  align-items: start;
+}
+
+/* --- BRAND COLUMN --- */
+.scaleo-footer-brand h3 {
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--white);
+  font-size: 1.8rem;
+  margin-bottom: .8rem;
+}
+.scaleo-footer-brand p {
+  max-width: 280px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* --- NAVIGATION COLUMNS --- */
+.scaleo-footer-col h4 {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.scaleo-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.scaleo-footer-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: all .3s ease;
+  display: inline-block;
+}
+
+.scaleo-footer-link:hover {
+  color: var(--white);
+  transform: translateX(4px); /* Subtle movement */
+}
+
+/* --- BOTTOM BAR --- */
+.scaleo-footer-bottom {
+  max-width: 1400px;
+  margin: 4rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: .8rem;
+  color: #666;
+}
+
+.scaleo-footer-legal {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.scaleo-footer-legal a {
+  color: #666;
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+.scaleo-footer-legal a:hover {
+  color: var(--white);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 980px) {
+  .scaleo-footer-container {
+    grid-template-columns: 1fr 1fr; /* Two columns on tablet/large mobile */
+    gap: 2rem;
+  }
+  .scaleo-footer-brand {
+    grid-column: span 2; /* Brand takes full width on top */
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .scaleo-footer-container {
+    grid-template-columns: 1fr; /* Single column stack */
+    gap: 2.5rem;
+  }
+  .scaleo-footer-brand {
+    grid-column: auto;
+  }
+  .scaleo-footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Animation for Entry */
+.scaleo-footer-fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: footerReveal .8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes footerReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger delays applied via JS or inline styles in HTML below */
+.delay-1 { animation-delay: .1s; }
+.delay-2 { animation-delay: .2s; }
+.delay-3 { animation-delay: .3s; }
+.delay-4 { animation-delay: .4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-footer-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+/* Styles for the new center logo in Loop Graphic */
+.loop-center-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfectly centers it */
+  width: 260px; /* Adjust size as needed */
+  height: auto;
+  z-index: 5; /* Ensures it sits above the rotating arrow but below text if needed */
+  pointer-events: none; /* Prevents clicking on it interfering with hover effects */
+  
+  /* Optional: Helps blend white logos on dark backgrounds if transparency isn't perfect */
+  mix-blend-mode: lighten; 
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+  .loop-center-logo {
+    width: 60px; /* Smaller on phones */
+  }
+}
+/* ==========================================================
+   14. COMING SOON SECTIONS (CAREERS, COMMUNITY, ACADEMY)
+   Scoped with .scaleo-soon-* prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-soon-section {
+  padding: clamp(6rem, 10vw, 10rem) var(--pad);
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,.05); /* Subtle separator between sections */
+}
+
+/* Alternate background slightly for visual rhythm */
+.scaleo-soon-section:nth-child(even) {
+  background: #0a0a0a; 
+}
+
+.scaleo-soon-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Eyebrow & Headline Styling */
+.scaleo-soon-eyebrow {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.scaleo-soon-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+}
+
+.scaleo-soon-text {
+  font-size: 1.15rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+}
+
+/* Status Badge: [ ● COMING SOON ] */
+.scaleo-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .5rem 1.2rem;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 99px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* Pulsing Dot inside Badge */
+.scaleo-soon-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--red);
+  animation: pulseDotSoon 2s infinite ease-in-out;
+}
+
+@keyframes pulseDotSoon {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(.8); }
+}
+
+/* --- SUBTLE VISUAL TREATMENTS PER SECTION --- */
+
+/* CAREERS: People/Team vibe - subtle grid dots */
+#careers::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; opacity: .03;
+  background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* COMMUNITY: Connected nodes vibe - faint lines crossing center */
+#community::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%; width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,0,0,.1), transparent);
+  transform: translate(-50%, -50%); pointer-events: none;
+}
+#community::after {
+  content: '';
+  position: absolute; top: 50%; left: 50%; width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(255,0,0,.1), transparent);
+  transform: translate(-50%, -50%); pointer-events: none;
+}
+
+/* ACADEMY: Knowledge/System vibe - soft radial glow from bottom */
+#academy {
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,0,0,.04), transparent 70%), #0a0a0a;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .scaleo-soon-headline { font-size: 2rem; }
+  .scaleo-soon-text { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scaleo-soon-dot { animation: none; }
+}
+/* ==========================================================
+   HIDE COMING SOON SECTIONS BY DEFAULT
+   ========================================================== */
+
+#careers, 
+#community, 
+#academy {
+  display: none; /* مخفي تماماً ولا يأخذ مساحة */
+}
+
+/* عندما يكون القسم نشطاً (تم الضغط عليه)، نجعله ظاهراً بحركة ناعمة */
+#careers.active, 
+#community.active, 
+#academy.active {
+  display: block;
+  animation: revealSection .8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes revealSection {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #careers.active, 
+  #community.active, 
+  #academy.active {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+/* ==========================================================
+   15. VALIDATION SECTION (PREMIUM FORM)
+   Scoped with .scaleo-val-* prefix to avoid conflicts
+   ========================================================== */
+
+.scaleo-val-section {
+  padding: clamp(6rem, 10vw, 10rem) var(--pad);
+  background: var(--black); /* Uses existing dark theme variable */
+  border-top: 1px solid rgba(255,255,255,.05);
+  position: relative;
+}
+
+/* Subtle radial glow behind the form area */
+.scaleo-val-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; right: 10%;
+  width: 600px; height: 600px;
+  transform: translate(50%, -50%);
+  background: radial-gradient(circle, rgba(255,0,0,.03), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.scaleo-val-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr; /* Left Text | Right Form */
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- LEFT SIDE: COPY --- */
+.scaleo-val-copy h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.scaleo-val-copy p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 450px;
+}
+.scaleo-val-eyebrow {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* --- RIGHT SIDE: THE FORM CARD --- */
+.scaleo-val-form-wrapper {
+  background: #0a0a0a; /* Slightly lighter than black for depth */
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  transition: all .5s ease;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.form-label {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+.form-input, 
+.form-select {
+  width: 100%;
+  background-color: #1F1F1F !important; /* لون غامق ثابت */
+  color: #FFFFFF !important;            /* نص أبيض واضح */
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  transition: all .3s ease;
+  outline: none;
+  appearance: none; /* إزالة السهم الافتراضي للمتصفح عشان نتحكم فيه لو حبيت */
+  cursor: pointer;
+}
+
+/* تنسيق خيارات القائمة المنسدلة نفسها (في بعض المتصفحات مثل Chrome/Firefox) */
+.form-select option {
+  background-color: #1F1F1F;
+  color: #FFFFFF;
+  padding: 10px;
+}
+/* إضافة سهم مخصص للقائمة */
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23A3A3A3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem; /* مساحة للسهم حتى لا يغطي النص */
+}
+.form-input:focus, 
+.form-select:focus {
+  border-color: var(--red);
+  background: rgba(255,255,255,.05);
+  box-shadow: 0 0 0 3px rgba(255,0,0,.1);
+}
+.form-input::placeholder {
+  color: #666;
+}
+
+/* Submit Button inside Form */
+.btn-validate-submit {
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: center;
+  padding: 1.1rem;
+  font-size: 1.05rem;
+  background: var(--red);
+  border-color: var(--red);
+  color: white;
+  box-shadow: 0 10px 30px -10px rgba(255,0,0,.3);
+}
+.btn-validate-submit:hover {
+  background: #e60000;
+  transform: translateY(-2px);
+}
+
+/* Success State Styling */
+.validation-success-state {
+  display: none; /* Hidden by default */
+  text-align: center;
+  padding: 2rem 0;
+}
+.validation-success-state.active {
+  display: block;
+  animation: fadeInScale .6s cubic-bezier(.2,.8,.2,1) forwards;
+}
+.success-icon {
+  width: 60px; height: 60px;
+  background: rgba(255,0,0,.1);
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--red);
+  font-size: 1.5rem;
+}
+.success-headline {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.success-text {
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+}
+.success-brand {
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--red);
+  font-weight: 700;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 980px) {
+  .scaleo-val-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .scaleo-val-copy {
+    text-align: center;
+  }
+  .scaleo-val-copy p {
+    margin: 0 auto;
+  }
+  .scaleo-val-form-wrapper {
+    padding: 2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .validation-success-state.active {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<header class="nav">
+  <a href="#top" class="wordmark" aria-label="SCALEO home">scaleo<i>.</i></a>
+  <nav class="nav-links" aria-label="Primary">
+    <!-- Main Sections -->
+    <a href="#what-we-do">What We Do</a>
+    <a href="#how-it-works">How It Works</a>
+    
+    <!-- External Pages -->
+    <a href="partnership.html">Partnerships</a>
+    <a href="about.html">About</a>
+    
+    <!-- Coming Soon Anchors -->
+    <a href="#careers">Careers</a>
+    <a href="#community">Community</a>
+    <a href="#academy">Academy</a>
+  </nav>
+  <a href="#validation" class="nav-cta">Start Validation</a>
+</header>
+
+<!-- ========== HERO ========== -->
+<main>
+<section class="hero" id="top">
+
+  <div class="hero-copy">
+    <h1 class="reveal" style="--r:.05s">We build the system behind your <em>growth.</em></h1>
+    <p class="reveal" style="--r:.2s">SCALEO connects the intelligence, strategy, acquisition, sales, retention and growth channels that turn products, services and demand into measurable revenue.</p>
+    <div class="cta-row reveal" style="--r:.35s">
+      <a href="#how-it-works" class="btn">See How It Works</a>
+      <a href="#validation" class="btn btn-primary">Start Validation</a>
+    </div>
+  </div>
+
+  <div class="visual reveal" style="--r:.25s">
+    <div class="stage" id="stage" aria-label="SCALEO intelligence core surfacing business insights">
+  
+  <!-- Central Intelligence Core -->
+  <div class="core-ring">
+    <div class="core-content">
+      <div class="wordmark">scaleo<i>.</i></div>
+      <small>Revenue Growth</small>
+    </div>
+  </div>
+
+  <!-- Container for Floating Messages -->
+  <div class="insights-layer" id="insightsLayer"></div>
+
+</div>
+
+</section>
+<!-- ========== SECOND SECTION: TRUSTED BY ========== -->
+<section class="trusted-by reveal" style="--r:.6s">
+  <p class="trusted-label">Trusted by businesses building what's next.</p>
+  
+  <a href="https://www.nviex.com" target="_blank" rel="noopener noreferrer" aria-label="Visit NVIEX website">
+    <div class="client-wrapper">
+      <!-- تم محاكاة لوجو NVIEX باستخدام النص والألوان لتجنب الحاجة لملفات خارجية -->
+      <div class="nviex-logo-text">
+        NV<span class="blue-part">IE</span>X
+      </div>
+    </div>
+  </a>
+</section>
+<!-- ========== SECTION 3: CORE PRODUCT ========== -->
+<section class="core-product" id="what-we-do">
+  
+  <!-- STICKY VISUAL BACKGROUND -->
+  <div class="cp-stage-container">
+    <div class="system-core" id="systemCore">
+      <!-- SVG Connections Layer -->
+      <svg class="connections-svg" viewBox="0 0 320 320">
+        <!-- Paths will be drawn via JS or static approximation -->
+        <circle cx="160" cy="160" r="140" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+        <path d="M160 20 Q 280 20 280 160 T 160 300 T 40 160 Z" fill="none" stroke="url(#grad1)" stroke-width="2" stroke-dasharray="5,5" class="conn-path" id="mainPath"/>
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF0000;stop-opacity:0.2" />
+            <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Center Hub -->
+      <div class="sys-ring"></div>
+      <div class="sys-center-label">
+        <h2>SCALEO</h2>
+        <span>Growth Infrastructure</span>
+      </div>
+
+      <!-- Dynamic Nodes (Injected by JS below for cleaner code, but here is structure) -->
+      <!-- We will generate these in JS to handle positioning math easily -->
+      <div id="nodesContainer"></div>
+    </div>
+  </div>
+
+  <!-- SCROLLING CONTENT OVERLAY -->
+  <div class="cp-scroll-track">
+    
+    <!-- Intro -->
+    <div class="cp-intro reveal" style="--r:.1s">
+      <h1>One system.<br>Every lever behind your growth.</h1>
+      <p>SCALEO connects intelligence, strategy, acquisition, sales, retention, and growth channels — turning fragmented activity into one connected engine.</p>
+    </div>
+
+    <!-- Capabilities List -->
+    <!-- Each block triggers a specific state in the visual above -->
+    
+    <div class="cap-block" data-capability="intelligence">
+      <div class="cap-card">
+        <span class="cap-num">01 / INTELLIGENCE</span>
+        <h3 class="cap-title">Growth Intelligence</h3>
+        <p class="cap-desc">Understand what is actually driving growth before you spend a dollar.</p>
+        <ul class="cap-list">
+          <li>Market Intel</li><li>Customer Data</li><li>Attribution</li><li>Revenue Mapping</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="strategy">
+      <div class="cap-card">
+        <span class="cap-num">02 / STRATEGY</span>
+        <h3 class="cap-title">Offer & Sales Strategy</h3>
+        <p class="cap-desc">Turn what you sell into something people desperately want to buy.</p>
+        <ul class="cap-list">
+          <li>Positioning</li><li>USP Definition</li><li>Funnel Architecture</li><li>Pricing Logic</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="creative">
+      <div class="cap-card">
+        <span class="cap-num">03 / CREATIVE</span>
+        <h3 class="cap-title">Creative Growth</h3>
+        <p class="cap-desc">Build, test, and iterate creative assets that stop the scroll.</p>
+        <ul class="cap-list">
+          <li>Creative Testing</li><li>Ad Variations</li><li>Content Direction</li><li>Optimization</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="acquisition">
+      <div class="cap-card">
+        <span class="cap-num">04 / ACQUISITION</span>
+        <h3 class="cap-title">Acquisition</h3>
+        <p class="cap-desc">Capture qualified demand across Meta, TikTok, and Search.</p>
+        <ul class="cap-list">
+          <li>Meta Ads</li><li>TikTok Ads</li><li>Google SEM</li><li>Traffic Scaling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="ai-sales">
+      <div class="cap-card">
+        <span class="cap-num">05 / AI SALES</span>
+        <h3 class="cap-title">AI Sales Engine</h3>
+        <p class="cap-desc">Automate conversations and close deals while you sleep.</p>
+        <ul class="cap-list">
+          <li>WhatsApp Bots</li><li>Cart Recovery</li><li>Upsell Flows</li><li>Lead Qualification</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="human-sales">
+      <div class="cap-card">
+        <span class="cap-num">06 / HUMAN TOUCH</span>
+        <h3 class="cap-title">Human Escalation</h3>
+        <p class="cap-desc">Seamless handoff to expert closers when high-value complexity arises.</p>
+        <ul class="cap-list">
+          <li>Sales Team Ops</li><li>Call Centers</li><li>Complex Deals</li><li>Consultative Selling</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cap-block" data-capability="retention">
+      <div class="cap-card">
+        <span class="cap-num">07 / RETENTION</span>
+        <h3 class="cap-title">Retention & LTV</h3>
+        <p class="cap-desc">Maximize lifetime value through loyalty, win-backs, and community.</p>
+        <ul class="cap-list">
+          <li>Email/SMS CRM</li><li>Loyalty Programs</li><li>Affiliates</li><li>B2B Channels</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FINALE: THE LOOP -->
+    <div class="loop-finale reveal">
+      <h2 class="loop-headline">Everything works together.</h2>
+      
+      <div class="loop-graphic">
+        <img src="assets/scaleo.png" alt="SCALEO Logo" class="loop-center-logo">
+        <div class="loop-arrow"></div>
+        <!-- Static positions for the loop steps -->
+        <div class="loop-step" style="top:-10px; left:50%; transform:translateX(-50%)">DATA</div>
+        <div class="loop-step" style="top:20%; right:-20px;">INTEL</div>
+        <div class="loop-step" style="bottom:20%; right:-20px;">ACTION</div>
+        <div class="loop-step" style="bottom:-10px; left:50%; transform:translateX(-50%)">RESULT</div>
+        <div class="loop-step" style="bottom:20%; left:-20px;">LEARN</div>
+        <div class="loop-step" style="top:20%; left:-20px;">REVENUE</div>
+      </div>
+
+      <p style="color:var(--muted); max-width:500px; margin:0 auto;">
+        Continuous feedback loops ensure that every sale informs the next strategy, creating compounding growth infrastructure.
+      </p>
+    </div>
+
+  </div>
+</section>
+<!-- ========== SECTION 4: GROWTH JOURNEY (SINGLE CONTAINER) ========== -->
+<section class="scaleo-gj-section" id="how-it-works">
+  
+  <div class="scaleo-gj-grid">
+    
+    <!-- LEFT: Static Introduction -->
+    <div class="scaleo-gj-left reveal">
+      <h2>From validation<br>to scale.</h2>
+      <p>SCALEO works through a continuous growth journey — understanding the business, identifying opportunities, activating systems, measuring results, and scaling what works.</p>
+    </div>
+
+    <!-- RIGHT: Single Animated Container -->
+    <div class="scaleo-gj-container reveal" style="--r:.2s">
+      <div class="scaleo-gj-bg-pattern"></div>
+      
+      <!-- This wrapper holds the changing content -->
+      <div class="scaleo-gj-content-wrapper fade-in" id="gjContentWrapper">
+        <span class="scaleo-gj-stage-num" id="gjStageNum">01</span>
+        <h3 class="scaleo-gj-stage-title" id="gjStageTitle">VALIDATE</h3>
+        <p class="scaleo-gj-stage-desc" id="gjStageDesc">Understand the business before deciding what it needs.</p>
+        
+        <div class="scaleo-gj-pills" id="gjPillsContainer">
+          <!-- Pills injected by JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ========== SECTION 5: AI GROWTH / SALES EXECUTION ========== -->
+<section class="scaleo-ai-section" id="ai-sales">
+  
+  <div class="scaleo-ai-grid">
+    
+    <!-- LEFT: Context & Copy -->
+    <div class="scaleo-ai-copy reveal">
+      <h2>AI that works<br>for your growth.</h2>
+      <p>One AI assistant trained around your business, products, offers, and sales process — helping customers, answering questions, following up, and turning more conversations into sales.</p>
+      <div class="scaleo-ai-tagline">
+        One AI. Different jobs.<br>Built around your business.
+      </div>
+    </div>
+
+    <!-- RIGHT: Live Product Demo -->
+    <div class="scaleo-ai-interface-wrapper reveal" style="--r:.2s">
+      
+      <div class="scaleo-ai-chat-window" id="scaleoAiChatWindow">
+        
+        <!-- Header -->
+        <div class="scaleo-ai-header">
+          <div class="scaleo-ai-brand">
+            <div class="scaleo-ai-logo-dot"></div>
+            <div>
+              <span class="scaleo-ai-status-text">SCALEO Assistant</span>
+              <span class="scaleo-ai-status-sub">Online • Ready to sell</span>
+            </div>
+          </div>
+          <!-- Decorative icons could go here -->
+        </div>
+
+        <!-- Messages Container -->
+        <div class="scaleo-ai-messages-area" id="scaleoAiMessages">
+          
+          <!-- Dynamic content injected by JS -->
+          
+        </div>
+
+        <!-- Scenario Switcher Overlay (Used for fading between major topics) -->
+        <div class="scaleo-ai-scenario-overlay" id="scaleoAiOverlay"></div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ========== SECTION 6: GROWTH MODELS ========== -->
+<section class="scaleo-gm-section" id="growth-models">
+  
+  <div class="scaleo-gm-header reveal">
+    <h2>Choose how you grow.</h2>
+    <p>Every business has a different growth challenge. SCALEO adapts the system around what your business actually needs.</p>
+  </div>
+
+  <div class="scaleo-gm-stack reveal" style="--r:.2s">
+    
+    <!-- MODEL 01: GROW -->
+    <article class="scaleo-gm-card" data-model="grow" role="button" tabindex="0" aria-expanded="false">
+      <div class="scaleo-gm-header-row">
+        <div class="scaleo-gm-title-group">
+          <span class="scaleo-gm-num">01</span>
+          <h3 class="scaleo-gm-title">GROW</h3>
+        </div>
+        <div class="scaleo-gm-icon"></div>
+      </div>
+      
+      <div class="scaleo-gm-content-wrapper">
+        <div class="scaleo-gm-content-inner">
+          <div class="scaleo-gm-col-left">
+            <p class="scaleo-gm-detail-text">
+              Focused growth, built around a specific need. Ideal for businesses that require SCALEO to solve or improve one critical area of their funnel rather than operating across the entire ecosystem.
+            </p>
+            <a href="#validation" class="scaleo-gm-cta-btn">
+              Start Validation <span class="scaleo-gm-cta-arrow">→</span>
+            </a>
+          </div>
+          <div class="scaleo-gm-col-right">
+            <ul class="scaleo-gm-features-list">
+              <li class="scaleo-gm-feature-pill">Acquisition</li>
+              <li class="scaleo-gm-feature-pill">AI Sales</li>
+              <li class="scaleo-gm-feature-pill">Retention</li>
+              <li class="scaleo-gm-feature-pill">Creative Growth</li>
+              <li class="scaleo-gm-feature-pill">Offer Strategy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- MODEL 02: SCALE -->
+    <article class="scaleo-gm-card" data-model="scale" role="button" tabindex="0" aria-expanded="false">
+      <div class="scaleo-gm-header-row">
+        <div class="scaleo-gm-title-group">
+          <span class="scaleo-gm-num">02</span>
+          <h3 class="scaleo-gm-title">SCALE</h3>
+        </div>
+        <div class="scaleo-gm-icon"></div>
+      </div>
+      
+      <div class="scaleo-gm-content-wrapper">
+        <div class="scaleo-gm-content-inner">
+          <div class="scaleo-gm-col-left">
+            <p class="scaleo-gm-detail-text">
+              A connected growth system for businesses ready to scale. This is a broader engagement where SCALEO connects multiple growth levers into one unified infrastructure, ensuring every channel feeds into the next.
+            </p>
+            <a href="#validation" class="scaleo-gm-cta-btn">
+              Start Validation <span class="scaleo-gm-cta-arrow">→</span>
+            </a>
+          </div>
+          <div class="scaleo-gm-col-right">
+            <ul class="scaleo-gm-features-list">
+              <li class="scaleo-gm-feature-pill">Growth Intelligence</li>
+              <li class="scaleo-gm-feature-pill">Strategy</li>
+              <li class="scaleo-gm-feature-pill">Acquisition</li>
+              <li class="scaleo-gm-feature-pill">AI & Human Sales</li>
+              <li class="scaleo-gm-feature-pill">Full Retention Loop</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- MODEL 03: CUSTOM -->
+    <article class="scaleo-gm-card" data-model="custom" role="button" tabindex="0" aria-expanded="false">
+      <div class="scaleo-gm-header-row">
+        <div class="scaleo-gm-title-group">
+          <span class="scaleo-gm-num">03</span>
+          <h3 class="scaleo-gm-title">CUSTOM</h3>
+        </div>
+        <div class="scaleo-gm-icon"></div>
+      </div>
+      
+      <div class="scaleo-gm-content-wrapper">
+        <div class="scaleo-gm-content-inner">
+          <div class="scaleo-gm-col-left">
+            <p class="scaleo-gm-detail-text">
+              Built around complex growth requirements. For enterprises or unique business models whose needs don't fit neatly into standard engagement frameworks. We design bespoke integrations and specialized infrastructure.
+            </p>
+            <a href="#validation" class="scaleo-gm-cta-btn">
+    Discuss Requirements <span class="scaleo-gm-cta-arrow">→</span>
+</a>
+          </div>
+          <div class="scaleo-gm-col-right">
+            <ul class="scaleo-gm-features-list">
+              <li class="scaleo-gm-feature-pill">Custom Systems</li>
+              <li class="scaleo-gm-feature-pill">Complex Integrations</li>
+              <li class="scaleo-gm-feature-pill">Specialized Infra</li>
+              <li class="scaleo-gm-feature-pill">Bespoke Solutions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- MODEL 04: BE A PARTNER -->
+    <article class="scaleo-gm-card" data-model="partner" role="button" tabindex="0" aria-expanded="false">
+      <div class="scaleo-gm-header-row">
+        <div class="scaleo-gm-title-group">
+          <span class="scaleo-gm-num">04</span>
+          <h3 class="scaleo-gm-title">BE A PARTNER</h3>
+        </div>
+        <div class="scaleo-gm-icon"></div>
+      </div>
+      
+      <div class="scaleo-gm-content-wrapper">
+        <div class="scaleo-gm-content-inner">
+          <div class="scaleo-gm-col-left">
+            <p class="scaleo-gm-detail-text">
+              Build with SCALEO. Share the growth. This is not an affiliate program. SCALEO may choose to work with selected high-potential businesses as a true growth partner — contributing operational resources and infrastructure in exchange for an agreed share of the revenue generated together.
+            </p>
+            <a href="partnership.html" class="scaleo-gm-cta-btn">
+              Explore Partnership <span class="scaleo-gm-cta-arrow">→</span>
+            </a>
+          </div>
+          <div class="scaleo-gm-col-right">
+            <ul class="scaleo-gm-features-list">
+              <li class="scaleo-gm-feature-pill">Growth Partnership</li>
+              <li class="scaleo-gm-feature-pill">Operational Resources</li>
+              <li class="scaleo-gm-feature-pill">Shared Upside</li>
+              <li class="scaleo-gm-feature-pill">Revenue Share</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- ========== SECTION 7: FINAL CTA ========== -->
+<section class="scaleo-final-cta" id="start-validation">
+  
+  <div class="scaleo-final-cta-content">
+    
+    <h2 class="scaleo-final-headline">Ready to build your growth system?</h2>
+    
+    <p class="scaleo-final-subtext">
+      Tell us where your business is today. We'll identify what it needs to grow — and build the right system around it.
+    </p>
+    
+    <div class="scaleo-final-buttons">
+      <!-- Primary Action -->
+      <a href="#validation" class="scaleo-btn-primary-lg">
+    Start Validation <span>→</span>
+</a>
+      
+      <!-- Secondary Action (Smooth Scroll to Core Product) -->
+      <button onclick="document.getElementById('what-we-do').scrollIntoView({behavior: 'smooth'})" class="scaleo-btn-secondary-lg">
+        Explore SCALEO
+      </button>
+    </div>
+    
+    <p class="scaleo-final-note">
+      No fixed package. No unnecessary complexity. Just the system your business needs.
+    </p>
+
+  </div>
+</section>
+<!-- ========== SECTION 8: CAREERS ========== -->
+<section class="scaleo-soon-section" id="careers">
+  <div class="scaleo-soon-container reveal-up">
+    <span class="scaleo-soon-eyebrow">CAREERS</span>
+    <h2 class="scaleo-soon-headline">Build the team behind what's next.</h2>
+    <p class="scaleo-soon-text">We're building SCALEO around people who think, build, execute, and learn.</p>
+    
+    <div class="scaleo-soon-badge">
+      <span class="scaleo-soon-dot"></span>
+      Coming Soon
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 9: COMMUNITY ========== -->
+<section class="scaleo-soon-section" id="community">
+  <div class="scaleo-soon-container reveal-up" style="--r:.1s;">
+    <span class="scaleo-soon-eyebrow">COMMUNITY</span>
+    <h2 class="scaleo-soon-headline">Where builders connect.</h2>
+    <p class="scaleo-soon-text">A community for founders, operators, growth thinkers, and people building what comes next.</p>
+    
+    <div class="scaleo-soon-badge">
+      <span class="scaleo-soon-dot"></span>
+      Coming Soon
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 10: ACADEMY ========== -->
+<section class="scaleo-soon-section" id="academy">
+  <div class="scaleo-soon-container reveal-up" style="--r:.2s;">
+    <span class="scaleo-soon-eyebrow">ACADEMY</span>
+    <h2 class="scaleo-soon-headline">Learn how growth is built.</h2>
+    <p class="scaleo-soon-text">Practical knowledge around growth, sales, strategy, systems, and building modern businesses.</p>
+    
+    <div class="scaleo-soon-badge">
+      <span class="scaleo-soon-dot"></span>
+      Coming Soon
+    </div>
+  </div>
+</section>
+<!-- ========== SECTION 11: START VALIDATION ========== -->
+<section class="scaleo-val-section" id="validation">
+  
+  <div class="scaleo-val-grid">
+    
+    <!-- LEFT: Context & Copy -->
+    <div class="scaleo-val-copy reveal-up">
+      <span class="scaleo-val-eyebrow">START VALIDATION</span>
+      <h2>Let's understand your business.</h2>
+      <p>Tell us a little about your business. We'll use this information as the starting point for understanding where growth opportunities may exist.</p>
+    </div>
+
+    <!-- RIGHT: The Form -->
+    <div class="scaleo-val-form-wrapper reveal-up" style="--r:.2s;">
+      
+           <!-- Actual Form -->
+      <form id="validationForm" action="https://formspree.io/f/xljdkobq" method="POST">
+        
+        <!-- حقل اسم النشاط التجاري -->
+        <div class="form-group">
+          <label class="form-label" for="valBizName">Your Name</label>
+          <input type="text" id="valBizName" name="your_name" class="form-input" placeholder="Enter your full name" required>
+        </div>
+
+        <!-- حقل الهاتف -->
+        <div class="form-group">
+          <label class="form-label" for="valPhone">Phone / WhatsApp</label>
+          <input type="tel" id="valPhone" name="phone_number" class="form-input" placeholder="+20 ..." required>
+        </div>
+
+        <!-- حقل الانستجرام -->
+        <div class="form-group">
+          <label class="form-label" for="valInsta">Business Instagram</label>
+          <input type="text" id="valInsta" name="instagram_handle" class="form-input" placeholder="@yourbusiness" required>
+        </div>
+
+        <!-- حقل التصنيف -->
+        <div class="form-group">
+          <label class="form-label" for="valCategory">Business Category</label>
+          <select id="valCategory" name="category" class="form-select" required>
+            <option value="" disabled selected>Select category</option>
+            <option value="ecommerce">E-commerce</option>
+            <option value="fashion">Fashion</option>
+            <option value="beauty">Beauty</option>
+            <option value="food">Food & Beverage</option>
+            <option value="services">Services</option>
+            <option value="saas">SaaS / Technology</option>
+            <option value="education">Education</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-validate-submit">
+          Start Validation →
+        </button>
+      </form>
+
+      <!-- Success State (Hidden Initially) -->
+      <div class="validation-success-state" id="validationSuccess">
+        <div class="success-icon">✓</div>
+        <h3 class="success-headline">VALIDATION REQUEST RECEIVED</h3>
+        <p class="success-text">Next, we'll understand your business.<br><br>We've received your information. Within the next 10 minutes, our team will contact you to schedule a short meeting.</p>
+        <span class="success-brand">SCALEO</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!-- ========== FOOTER ========== -->
+<footer class="scaleo-footer">
+  
+  <div class="scaleo-footer-container">
+    
+    <!-- Column 1: Brand -->
+    <div class="scaleo-footer-brand scaleo-footer-fade-in delay-1">
+      <h3>SCALEO</h3>
+      <p>We build the system behind your growth.</p>
+    </div>
+
+    <!-- Column 2: System Links -->
+    <div class="scaleo-footer-col scaleo-footer-fade-in delay-2">
+      <h4>System</h4>
+      <ul class="scaleo-footer-links">
+        <li><a href="#what-we-do" class="scaleo-footer-link">Core Product</a></li>
+        <li><a href="#how-it-works" class="scaleo-footer-link">Growth Journey</a></li>
+        <li><a href="#ai-sales" class="scaleo-footer-link">AI Growth</a></li>
+        <li><a href="#growth-models" class="scaleo-footer-link">Growth Models</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Company Links -->
+    <div class="scaleo-footer-col scaleo-footer-fade-in delay-3">
+      <h4>Company</h4>
+      <ul class="scaleo-footer-links">
+        <li><a href="about.html" class="scaleo-footer-link">About</a></li>
+        <li><a href="partnership.html" class="scaleo-footer-link">Partnership</a></li>
+       <li><a href="#careers" class="scaleo-footer-link">Careers</a></li>
+<li><a href="#community" class="scaleo-footer-link">Community</a></li>
+<li><a href="#academy" class="scaleo-footer-link">Academy</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Connect Links -->
+    <div class="scaleo-footer-col scaleo-footer-fade-in delay-4">
+      <h4>Connect</h4>
+      <ul class="scaleo-footer-links">
+<li id="linkedin-profile"><a href="https://www.linkedin.com/company/scaleocompany/about/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="scaleo-footer-link">LinkedIn</a></li>
+        <li><a href="https://www.instagram.com/scaleocompany/?hl=en" target="_blank" rel="noopener noreferrer" class="scaleo-footer-link">Instagram</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61594946612128" target="_blank" rel="noopener noreferrer" class="scaleo-footer-link">Facebook</a></li>
+        <li><a href="mailto:scaleobusiness@gmail.com" class="scaleo-footer-link">Email</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="scaleo-footer-bottom scaleo-footer-fade-in delay-4">
+    <div class="copyright">
+      © 2026 SCALEO. All rights reserved.
+    </div>
+    <div class="scaleo-footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+
+</footer>
+</main>
+
+<script>
+/* ==========================================================
+   INTELLIGENCE CORE LOGIC (FLOATING INSIGHTS)
+   ========================================================== */
+
+const BUSINESS_INSIGHTS = [
+  "Your traffic is growing, but conversion isn't.",
+  "You're spending more on acquisition without enough revenue growth.",
+  "Customers are showing interest — but too many conversations stop before purchase.",
+  "Your best customers aren't being retained effectively.",
+  "Sales team losing high-value conversations due to slow response times.",
+  "Demand exists, but the system isn't turning it into predictable revenue.",
+  "Growth relies too heavily on a single channel."
+];
+
+// Positions relative to center (percentages)
+// These create an organic spread around the circle
+const POSITIONS = [
+  { top: '15%', left: '70%' },  // Upper Right
+  { top: '75%', left: '20%' },  // Lower Left
+  { top: '40%', left: '85%' },  // Far Right
+  { top: '20%', left: '15%' },  // Upper Left
+  { top: '80%', left: '75%' },  // Lower Right
+  { top: '50%', left: '10%' },  // Mid Left
+  { top: '10%', left: '45%' }   // Top Center-ish
+];
+
+const insightsLayer = document.getElementById('insightsLayer');
+let currentInsightIndex = 0;
+let insightTimer = null;
+
+function showNextInsight() {
+  if (!insightsLayer) return;
+
+  // 1. Select Data & Position FIRST
+  const text = BUSINESS_INSIGHTS[currentInsightIndex];
+  
+  // Safety check: Ensure we have text before creating an element
+  if (!text) {
+    currentInsightIndex++;
+    insightTimer = setTimeout(showNextInsight, 1000);
+    return;
+  }
+
+  const pos = POSITIONS[currentInsightIndex % POSITIONS.length];
+
+  // 2. Clean up OLD bubbles IMMEDIATELY and HARD
+  // We remove all existing bubbles from the layer instantly to prevent overlap/glitch
+  const existingBubbles = insightsLayer.querySelectorAll('.insight-bubble');
+  existingBubbles.forEach(old => {
+    old.remove(); // Hard remove from DOM immediately
+  });
+
+  // 3. Create the NEW bubble
+  const newBubble = document.createElement('div');
+  newBubble.className = 'insight-bubble';
+  newBubble.textContent = text; // Set text BEFORE appending to ensure it's never empty visually
+  newBubble.style.top = pos.top;
+  newBubble.style.left = pos.left;
+  
+  // Append to DOM
+  insightsLayer.appendChild(newBubble);
+
+  // 4. Trigger Animation for NEW bubble
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      newBubble.classList.add('active');
+    });
+  });
+
+  // 5. Schedule Removal of CURRENT bubble and Next Cycle
+  setTimeout(() => {
+    // Fade out current
+    newBubble.classList.remove('active');
+    newBubble.classList.add('fading-out');
+    
+    // Remove from DOM completely after fade animation finishes (800ms)
+    setTimeout(() => {
+      if(newBubble.parentNode) newBubble.remove();
+    }, 850); 
+
+    // Move index
+    currentInsightIndex++;
+    
+    // Start next cycle
+    insightTimer = setTimeout(showNextInsight, 1500); 
+    
+  }, 4000); // Stay visible for 4 seconds
+}
+
+// Initialize Sequence
+if (insightsLayer) {
+  // Initial delay before starting
+  setTimeout(showNextInsight, 1000);
+}
+
+// Pause when tab is hidden to save resources
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearTimeout(insightTimer);
+  } else {
+    // Resume safely
+    clearTimeout(insightTimer);
+    showNextInsight(); 
+  }
+});
+/* ==========================================================
+   CORE PRODUCT LOGIC
+   ========================================================== */
+
+// Define the nodes around the circle
+const NODES = [
+  { label: "DATA", angle: -90 },
+  { label: "INTELLIGENCE", angle: -45 },
+  { label: "STRATEGY", angle: 0 },
+  { label: "ACQUISITION", angle: 45 },
+  { label: "SALES", angle: 90 },
+  { label: "RETENTION", angle: 135 },
+  { label: "REVENUE", angle: 180 }
+];
+
+const nodesContainer = document.getElementById('nodesContainer');
+const radius = 140; // Match SVG logic roughly
+
+NODES.forEach((n, i) => {
+  const rad = n.angle * Math.PI / 180;
+  const x = 160 + radius * Math.cos(rad);
+  const y = 160 + radius * Math.sin(rad);
+  
+  const nodeEl = document.createElement('div');
+  nodeEl.className = 'orbit-node';
+  nodeEl.dataset.index = i;
+  nodeEl.style.left = `${x}px`;
+  nodeEl.style.top = `${y}px`;
+  
+  // Rotate text based on position so it's readable? 
+  // For simplicity in this demo, we keep them horizontal but positioned absolutely
+  
+  nodeEl.innerHTML = `
+    <div class="node-dot"></div>
+    <div class="node-line"></div>
+    <div class="node-text">${n.label}</div>
+  `;
+  nodesContainer.appendChild(nodeEl);
+});
+
+// Scroll Observer for Capabilities
+const capBlocks = document.querySelectorAll('.cap-block');
+const orbitNodes = document.querySelectorAll('.orbit-node');
+const connPaths = document.querySelectorAll('.conn-path');
+
+// Map capabilities to node indices approximately
+// 0:Intel, 1:Strategy, 2:Creative(Acq pre), 3:Acq, 4:AISales, 5:HumSales, 6:Reten
+const CAP_TO_NODE_MAP = {
+  'intelligence': 1,
+  'strategy': 2,
+  'creative': 3, // Maps closer to Acquisition start
+  'acquisition': 3,
+  'ai-sales': 4,
+  'human-sales': 4,
+  'retention': 5
+};
+
+const observerOptions = {
+  root: null,
+  threshold: 0.5 // Trigger when card is half visible
+};
+
+const coreObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const card = entry.target.querySelector('.cap-card');
+    
+    if (entry.isIntersecting) {
+      // Show Card Animation
+      card.classList.add('visible');
+      
+      // Update Visual State
+      const capName = entry.target.dataset.capability;
+      const activeIndex = CAP_TO_NODE_MAP[capName] !== undefined ? CAP_TO_NODE_MAP[capName] : -1;
+      
+      // Reset all nodes
+      orbitNodes.forEach(n => n.classList.remove('active'));
+      
+      // Activate relevant node(s)
+      if (activeIndex >= 0 && orbitNodes[activeIndex]) {
+        orbitNodes[activeIndex].classList.add('active');
+        
+        // Optional: Highlight path leading to it
+        // This requires more complex SVG manipulation, keeping it simple with Node Glow for now
+      }
+      
+      // Special case for Retention/Loop finale handled separately or just highlight last few
+      if (capName === 'retention') {
+         if(orbitNodes[6]) orbitNodes[6].classList.add('active'); // Revenue
+      }
+
+    } else {
+      // Optional: Remove visible class if scrolling back up? 
+      // Usually better to keep them visible once revealed for stability, 
+      // but let's reset visual state if they leave screen completely to save perf
+      // card.classList.remove('visible'); 
+    }
+  });
+}, observerOptions);
+
+capBlocks.forEach(block => coreObserver.observe(block));
+
+// Handle the Final Loop Reveal
+const loopFinale = document.querySelector('.loop-finale');
+if(loopFinale) {
+  const loopObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        const steps = entry.target.querySelectorAll('.loop-step');
+        steps.forEach((step, idx) => {
+          setTimeout(() => step.classList.add('show'), idx * 150);
+        });
+        // Also light up all nodes in the main visual behind it for grand finale
+        orbitNodes.forEach(n => n.classList.add('active'));
+      }
+    });
+  }, { threshold: 0.3 });
+  loopObs.observe(loopFinale);
+}
+/* ==========================================================
+   GROWTH JOURNEY LOGIC (AUTO-ROTATE)
+   ========================================================== */
+
+const GJ_DATA = [
+  { num: "01", title: "VALIDATE", desc: "Understand the business before deciding what it needs.", pills: ["Business Model", "Market", "Customers", "Product", "Revenue"] },
+  { num: "02", title: "IDENTIFY", desc: "Find where the biggest opportunities and revenue leaks actually are.", pills: ["Growth Opportunities", "Customer Behavior", "Revenue Leaks", "Bottlenecks", "High-Impact Opps"] },
+  { num: "03", title: "BUILD", desc: "Build the strategy and systems required to turn opportunity into growth.", pills: ["Positioning", "Offers", "Creative", "Acquisition", "Sales Systems"] },
+  { num: "04", title: "ACTIVATE", desc: "Put the right growth channels and systems into motion.", pills: ["Acquisition", "AI Sales", "Human Sales", "Retention", "Growth Channels"] },
+  { num: "05", title: "MEASURE", desc: "Connect activity to what matters: measurable business results.", pills: ["Revenue", "Attribution", "Conversion", "Customer Value", "Channel Perf."] },
+  { num: "06", title: "LEARN", desc: "Turn every result into intelligence that improves the next decision.", pills: ["Results", "Insights", "Recommendations", "Optimization", "Learning"] },
+  { num: "07", title: "SCALE", desc: "Scale what proves it can create sustainable growth.", pills: ["What Works", "Optimization", "Expansion", "Efficiency", "Compounding Growth"] }
+];
+
+// DOM Elements for Journey Section
+const gjWrapper = document.getElementById('gjContentWrapper');
+const gjNumEl = document.getElementById('gjStageNum');
+const gjTitleEl = document.getElementById('gjStageTitle');
+const gjDescEl = document.getElementById('gjStageDesc');
+const gjPillsEl = document.getElementById('gjPillsContainer');
+
+let gjCurrentIndex = 0;
+let gjIntervalId = null;
+const ROTATION_SPEED = 2500; // Change stage every 2.5 seconds
+const TRANSITION_TIME = 400; // Fade duration
+
+function renderGJStage(index) {
+  if(!gjWrapper) return; // Safety check
+  
+  const data = GJ_DATA[index];
+  
+  // Update Text Content
+  gjNumEl.textContent = data.num;
+  gjTitleEl.textContent = data.title;
+  gjDescEl.textContent = data.desc;
+  
+  // Generate Pills HTML
+  gjPillsEl.innerHTML = data.pills.map(pill => 
+    `<span class="scaleo-gj-pill">${pill}</span>`
+  ).join('');
+}
+
+function cycleGJStages() {
+  if(!gjWrapper) return;
+
+  // 1. Fade Out Current Content
+  gjWrapper.classList.remove('fade-in');
+  gjWrapper.classList.add('fade-out');
+  
+  // 2. Wait for fade out, then swap content and fade in
+  setTimeout(() => {
+    // Move to next index (loop back to 0 after last item)
+    gjCurrentIndex = (gjCurrentIndex + 1) % GJ_DATA.length;
+    
+    // Render new content while invisible
+    renderGJStage(gjCurrentIndex);
+    
+    // Trigger Fade In
+    gjWrapper.classList.remove('fade-out');
+    gjWrapper.classList.add('fade-in');
+    
+  }, TRANSITION_TIME);
+}
+
+function startGJRotation() {
+  if (gjIntervalId || !gjWrapper) return; // Prevent double start or run if element missing
+  
+  // Initial render
+  renderGJStage(gjCurrentIndex);
+  
+  // Start looping interval
+  gjIntervalId = setInterval(cycleGJStages, ROTATION_SPEED);
+}
+
+// Intersection Observer to start animation ONLY when section is visible
+const gjSection = document.querySelector('.scaleo-gj-section');
+if (gjSection) {
+  const gjObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startGJRotation();
+      } else {
+        // Pause when off-screen to save performance/battery
+        if (gjIntervalId) {
+          clearInterval(gjIntervalId);
+          gjIntervalId = null;
+        }
+      }
+    });
+  }, { threshold: 0.2 }); // Trigger when 20% of section is visible
+
+  gjObserver.observe(gjSection);
+}
+/* ==========================================================
+   AI SALES SECTION LOGIC (ACCUMULATIVE CHAT HISTORY)
+   ========================================================== */
+
+// Define Scenarios Data
+const AI_SCENARIOS = [
+  {
+    id: "product-question",
+    label: "Product Inquiry", // Added label for divider
+    messages: [
+      { type: "user", text: "Is this available in black?", delay: 800 },
+      { type: "bot-typing", delay: 1200 }, 
+      { type: "bot", text: "Yes. Black is available in Medium and Large.\n\nWould you like me to help you choose your size?", delay: 1500 },
+      { type: "action", items: ["Show Me Sizes", "Ask About Material"], delay: 600 }
+    ]
+  },
+  {
+    id: "appointment-booking",
+    label: "Service Booking",
+    messages: [
+      { type: "user", text: "I'd like to book an appointment.", delay: 800 },
+      { type: "bot-typing", delay: 1000 },
+      { type: "bot", text: "Of course. Here are the available times:", delay: 1200 },
+      { type: "action", items: ["10:00 AM", "12:30 PM", "4:00 PM"], highlightIndex: 1, delay: 800 },
+      { type: "user", text: "Let's do 12:30 PM.", delay: 1000 },
+      { type: "bot", text: "Booked! I've sent the confirmation details to your email.", delay: 1000 }
+    ]
+  },
+  {
+    id: "follow-up-cart",
+    label: "Abandoned Cart Recovery",
+    messages: [
+      { type: "system-note", text: "Customer Interest Detected", delay: 500 },
+      { type: "bot", text: "This customer showed interest but didn't complete the purchase.", delay: 1000 },
+      { type: "bot", text: "\"Still interested? I can help you complete your order with a quick checkout link.\"", delay: 1500 },
+      { type: "action", items: ["Send Link", "Offer Discount Code"], delay: 500 }
+    ]
+  },
+  {
+    id: "human-escalation",
+    label: "Human Handoff",
+    messages: [
+      { type: "user", text: "I need to speak to someone about a complex enterprise deal.", delay: 800 },
+      { type: "bot-typing", delay: 1000 },
+      { type: "bot", text: "Understood. This conversation requires specialized attention.", delay: 1200 },
+      { type: "transition-alert", text: "Transferring to Human Sales...", delay: 1000 },
+      { type: "success-state", text: "Connected with Sarah (Senior Account Manager)", delay: 1500 }
+    ]
+  }
+];
+
+let currentScenarioIndex = 0;
+let scenarioTimeoutId = null;
+const chatContainer = document.getElementById('scaleoAiMessages');
+
+function addMessage(type, content, extraClass = "") {
+  if (!chatContainer) return;
+
+  const row = document.createElement('div');
+  row.className = `scaleo-ai-msg-row ${type === 'user' ? 'scaleo-ai-msg-user' : 'scaleo-ai-msg-bot'} ${extraClass}`;
+  
+  let bubbleHtml = '';
+  
+  if (type === 'user') {
+    bubbleHtml = `<div class="scaleo-ai-bubble">${content.replace(/\n/g, '<br>')}</div>`;
+  } else if (type === 'bot') {
+    bubbleHtml = `<div class="scaleo-ai-bubble">${content.replace(/\n/g, '<br>')}</div>`;
+  } else if (type === 'bot-typing') {
+    bubbleHtml = `
+      <div class="scaleo-ai-typing active">
+        <span></span><span></span><span></span>
+      </div>
+    `;
+    row.classList.add('no-bubble'); 
+  } else if (type === 'action') {
+    const buttons = content.map((item, idx) => {
+       const isHighlight = extraClass.includes(`highlight-${idx}`);
+       return `<button class="scaleo-ai-action-btn ${isHighlight ? 'highlight' : ''}">${item}</button>`;
+    }).join('');
+    bubbleHtml = `<div class="scaleo-ai-actions">${buttons}</div>`;
+  } else if (type === 'system-note') {
+     bubbleHtml = `<div style="font-size:.75rem; color:var(--muted); text-align:center; margin:1rem 0;">${content}</div>`;
+     row.style.justifyContent = 'center';
+  } else if (type === 'transition-alert') {
+     bubbleHtml = `<div class="scaleo-ai-bubble" style="border-color:var(--red); background:rgba(255,0,0,.1); color:white;">${content}</div>`;
+  } else if (type === 'success-state') {
+     bubbleHtml = `<div class="scaleo-ai-bubble" style="border-color:#4CAF50; background:rgba(76,175,80,.1); color:white;">✅ ${content}</div>`;
+  }
+
+  row.innerHTML = bubbleHtml;
+  chatContainer.appendChild(row);
+  
+  // Trigger animation frame for smooth entry
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      row.classList.add('visible');
+      // Auto scroll to bottom smoothly
+      scrollToBottom();
+    }, 50);
+  });
+}
+
+// Helper: Add Divider between scenarios
+function addScenarioDivider(label) {
+  if (!chatContainer || !label) return;
+  
+  const divider = document.createElement('div');
+  divider.className = 'scaleo-ai-msg-row';
+  divider.style.justifyContent = 'center';
+  divider.style.marginTop = '2rem';
+  divider.style.marginBottom = '1rem';
+  divider.innerHTML = `
+    <div style="font-size:.7rem; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; border-top:1px solid rgba(255,255,255,.05); padding-top:.5rem; width:fit-content;">
+      ${label}
+    </div>
+  `;
+  chatContainer.appendChild(divider);
+  
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      divider.classList.add('visible');
+      scrollToBottom();
+    }, 50);
+  });
+}
+
+// Helper: Smooth Scroll to Bottom
+function scrollToBottom() {
+  if (!chatContainer) return;
+  // Use behavior:'smooth' for premium feel
+  chatContainer.scrollTo({
+    top: chatContainer.scrollHeight,
+    behavior: 'smooth'
+  });
+}
+
+async function playScenario(scenarioObj) {
+  // 1. Add Divider first
+  addScenarioDivider(scenarioObj.label);
+  
+  // Small pause after divider
+  await new Promise(r => setTimeout(r, 400)); 
+
+  // 2. Play Messages sequentially
+  for (let i = 0; i < scenarioObj.messages.length; i++) {
+    const msg = scenarioObj.messages[i];
+    
+    if (msg.type === 'action') {
+       addMessage('action', msg.items, msg.highlightIndex !== undefined ? `highlight-${msg.highlightIndex}` : "");
+    } else {
+       addMessage(msg.type, msg.text || msg.content);
+    }
+
+    await new Promise(r => setTimeout(r, msg.delay || 1000));
+  }
+}
+
+function startAISimulation() {
+  if (!chatContainer) return;
+
+  const nextScenario = async () => {
+    const scenario = AI_SCENARIOS[currentScenarioIndex];
+    
+    await playScenario(scenario);
+    
+    // Move to next index
+    currentScenarioIndex = (currentScenarioIndex + 1) % AI_SCENARIOS.length;
+    
+    // Wait before starting the NEXT scenario loop
+    // Since we accumulate history, we wait longer here so user reads last message
+    scenarioTimeoutId = setTimeout(nextScenario, 2500);
+  };
+
+  nextScenario();
+}
+
+// Intersection Observer to start only when visible
+const aiSection = document.querySelector('.scaleo-ai-section');
+if (aiSection) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startAISimulation();
+        observer.disconnect(); // Run once initialization starts
+      }
+    });
+  }, { threshold: 0.3 });
+  
+  observer.observe(aiSection);
+}
+/* ==========================================================
+   GROWTH MODELS LOGIC (ACCORDION INTERACTION)
+   ========================================================== */
+
+const gmCards = document.querySelectorAll('.scaleo-gm-card');
+
+function toggleModel(cardToToggle) {
+  const isOpen = cardToToggle.classList.contains('open');
+
+  // 1. Close ALL other cards first (Mutual Exclusion)
+  gmCards.forEach(card => {
+    if (card !== cardToToggle && card.classList.contains('open')) {
+      card.classList.remove('open');
+      card.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // 2. Toggle the clicked card
+  if (isOpen) {
+    // If it was already open, close it
+    cardToToggle.classList.remove('open');
+    cardToToggle.setAttribute('aria-expanded', 'false');
+  } else {
+    // If it was closed, open it
+    cardToToggle.classList.add('open');
+    cardToToggle.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// Attach Event Listeners
+gmCards.forEach(card => {
+ // Click Handler
+card.addEventListener('click', (e) => {
+    // Check if the user clicked on a LINK or BUTTON inside the card
+    const target = e.target.closest('a, button');
+    
+    if (target) {
+        // If they clicked a link/button, let the browser handle it naturally (don't prevent default)
+        return; 
+    }
+    
+    // Otherwise, treat it as a click on the card background to open/close accordion
+    e.preventDefault(); 
+    toggleModel(card);
+});
+  // Keyboard Accessibility (Enter or Space)
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleModel(card);
+    }
+  });
+});
+/* ==========================================================
+   SHOW COMING SOON SECTIONS ON CLICK
+   ========================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  // قائمة بالروابط التي يجب أن تفعل الأقسام المخفية
+  const triggerLinks = [
+    { selector: 'a[href="#careers"]', targetId: 'careers' },
+    { selector: 'a[href="#community"]', targetId: 'community' },
+    { selector: 'a[href="#academy"]', targetId: 'academy' }
+  ];
+
+  triggerLinks.forEach(linkConfig => {
+    const links = document.querySelectorAll(linkConfig.selector);
+    
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault(); // منع السلوك الافتراضي للرابطة مؤقتاً
+        
+        const targetSection = document.getElementById(linkConfig.targetId);
+        
+        if (targetSection) {
+          // 1. إزالة حالة "النشط" من أي قسم آخر مفتوح سابقاً (اختياري، لكن ينظم التجربة)
+          ['careers', 'community', 'academy'].forEach(id => {
+            const sec = document.getElementById(id);
+            if(sec && id !== linkConfig.targetId) {
+               sec.classList.remove('active');
+            }
+          });
+
+          // 2. تفعيل القسم المستهدف
+          targetSection.classList.add('active');
+          
+          // 3. الانتظار قليلاً حتى يكتمل ظهور العنصر في الـ DOM ثم التمرير السلس
+          setTimeout(() => {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 50); 
+        }
+      });
+    });
+  });
+});
+/* ==========================================================
+   VALIDATION FORM LOGIC (WITH REAL EMAIL INTEGRATION)
+   ========================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('validationForm');
+  const successState = document.getElementById('validationSuccess');
+
+  if (!form || !successState) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault(); // منع إعادة تحميل الصفحة الافتراضية
+
+    // تغيير نص الزر لتوضيح أن العملية جارية
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = 'Sending...';
+    submitBtn.disabled = true;
+
+    try {
+      // تجهيز البيانات للإرسال
+      const formData = new FormData(form);
+
+      // إرسال الطلب إلى Formspree
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // 1. إخفاء الفورم
+        form.style.display = 'none';
+        
+        // 2. إظهار رسالة النجاح
+        successState.classList.add('active');
+        
+        // 3. التمرير السلس لرسالة النجاح
+        setTimeout(() => {
+          successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        
+      } else {
+        // حالة فشل الخادم (مثلاً ID غلط أو مشكلة اتصال)
+        alert('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+        console.error(response.data);
+        
+        // إرجاع الزر لحالته الطبيعية
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+      
+    } catch (error) {
+      // حالة انقطاع الإنترنت أو خطأ شبكي
+      alert('تعذر الاتصال بالخادم. تحقق من اتصال الإنترنت وحاول مجدداً.');
+      console.error(error);
+      
+      // إرجاع الزر لحالته الطبيعية
+      submitBtn.innerHTML = originalText;
+      submitBtn.disabled = false;
+    }
+  });
+});
+</script>
+</body>
+</html>
