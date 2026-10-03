@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCALEO | Solutions — Growth built around your business</title>
+<meta name="description" content="SCALEO builds the growth systems behind your business. We don't sell a ready-made service — we understand your business, identify what's holding growth back, then build and implement the right solution. Book a Free Growth Discovery Call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================
+1. DESIGN TOKENS (matched to the SCALEO brand system)
+========================================================== */
+:root {
+--red: #FF0000; /* logo "o" red */
+--red-hover: #e60000;
+--red-soft: rgba(255,0,0,.35);
+--red-faint: rgba(255,0,0,.12);
+--red-glow: rgba(255,0,0,.06);
+--charcoal: #1F1F1F;
+--black: #070707; /* page background */
+--surface: #0a0a0a; /* raised cards */
+--surface-2: #0f0f0f;
+--white: #FFFFFF;
+--text: #F5F5F5;
+--muted: #A3A3A3;
+--dim: #6b6b6b;
+--line: rgba(255,255,255,.10);
+--line-soft: rgba(255,255,255,.06);
+--font-en: "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+--font-ar: "Cairo", "Poppins", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+--pad: clamp(1.25rem, 4vw, 4rem);
+--nav-h: 76px;
+--maxw: 1240px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+font-family: var(--font-en); color: var(--text); background: var(--black);
+line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+/* Arabic typography switch */
+html[lang="ar"] body,
+html[lang="ar"] .btn,
+html[lang="ar"] input { font-family: var(--font-ar); }
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { letter-spacing: 0; line-height: 1.28; }
+html[lang="ar"] .section-title { max-width: none; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* Latin terms stay geometric even inside Arabic copy */
+.en { font-family: var(--font-en); letter-spacing: -.01em; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+section { position: relative; }
+
+/* Small uppercase eyebrow label */
+.eyebrow {
+font-family: var(--font-en);
+font-size: .78rem; font-weight: 700; letter-spacing: .18em;
+text-transform: uppercase; color: var(--red);
+display: inline-flex; align-items: center; gap: .6rem;
+}
+.eyebrow.muted { color: var(--muted); }
+.eyebrow::before {
+content: ''; width: 22px; height: 1px; background: currentColor; opacity: .6;
+}
+
+/* Headlines */
+h1,h2,h3 { font-weight: 800; letter-spacing: -.02em; line-height: 1.12; }
+.section-title {
+font-size: clamp(1.9rem, 3.6vw, 3rem);
+color: var(--white); margin-top: 1.1rem; max-width: 20ch;
+}
+.section-lede {
+font-size: clamp(1rem, 1.4vw, 1.15rem);
+color: var(--muted); max-width: 62ch; margin-top: 1.2rem; line-height: 1.75;
+}
+
+/* Buttons */
+.btn {
+font-family: var(--font-en); font-weight: 600; font-size: .95rem;
+padding: .95rem 1.7rem; border-radius: 999px; cursor: pointer;
+border: 1px solid var(--line); background: transparent; color: var(--white);
+transition: transform .25s, background .25s, border-color .25s, box-shadow .25s;
+display: inline-flex; align-items: center; gap: .55rem; white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); border-color: var(--white); }
+.btn-primary { background: var(--red); border-color: var(--red); color: #fff; box-shadow: 0 10px 40px -12px var(--red); }
+.btn-primary:hover { background: var(--red-hover); border-color: var(--red-hover); }
+.btn-free {
+background: transparent; border: 1px solid var(--red); color: var(--white);
+position: relative;
+}
+.btn-free:hover { background: var(--red); border-color: var(--red); }
+.btn-free .tag-free {
+font-family: var(--font-en); font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+background: var(--red); color: #fff; padding: .18rem .5rem; border-radius: 999px;
+}
+.btn-free:hover .tag-free { background: #fff; color: var(--red); }
+
+/* Direction-aware arrows */
+.arrow { transition: transform .25s; display: inline-block; }
+[dir="ltr"] .arrow { transform: rotate(0deg); }
+[dir="rtl"] .arrow { transform: rotate(180deg); }
+.btn:hover .arrow, .book-link:hover .arrow { transform: translateX(4px); }
+[dir="rtl"] .btn:hover .arrow, [dir="rtl"] .book-link:hover .arrow { transform: translateX(-4px) rotate(180deg); }
+
+/* ==========================================================
+2. NAVBAR
+========================================================== */
+.nav {
+position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 60;
+display: flex; align-items: center; justify-content: space-between;
+padding-inline: var(--pad);
+background: linear-gradient(var(--black) 45%, rgba(7,7,7,0));
+transition: background .3s ease, border-color .3s ease;
+border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+background: rgba(7,7,7,.82); backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px); border-bottom-color: var(--line-soft);
+}
+.brand { display: flex; align-items: baseline; gap: .55rem; }
+.wordmark { font-family: var(--font-en); font-weight: 700; letter-spacing: -.04em; line-height: 1; color: var(--white); font-size: 1.7rem; }
+.wordmark i { font-style: normal; color: var(--red); }
+.brand-tag { font-family: var(--font-en); font-size: .62rem; font-weight: 700; letter-spacing: .22em; color: var(--muted); text-transform: uppercase; }
+
+.nav-links { display: flex; gap: 1.9rem; font-size: .9rem; color: var(--muted); align-items: center; }
+.nav-links a { transition: color .25s; position: relative; }
+.nav-links a:hover { color: var(--white); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+.nav-cta {
+font-size: .85rem; font-weight: 600; padding: .62rem 1.25rem; border-radius: 999px;
+border: 1px solid var(--red); color: var(--white); transition: background .25s;
+}
+.nav-cta:hover { background: var(--red); }
+.burger { display: none; background: none; border: 1px solid var(--line); border-radius: 10px; width: 42px; height: 42px; cursor: pointer; color: var(--white); align-items: center; justify-content: center; }
+.burger svg { width: 20px; height: 20px; }
+
+/* Language toggle — minimal, matches SCALEO visual language */
+.lang-toggle {
+display: inline-flex; align-items: center; gap: .1rem;
+border: 1px solid var(--line); border-radius: 999px; padding: .28rem;
+font-family: var(--font-en);
+}
+.lang-opt {
+background: none; border: none; cursor: pointer; color: var(--dim);
+font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+padding: .35rem .6rem; border-radius: 999px; transition: color .25s, background .25s;
+}
+.lang-opt:hover { color: var(--muted); }
+.lang-opt.active { color: var(--white); background: var(--surface-2); }
+.lang-sep { color: var(--line); font-size: .7rem; user-select: none; }
+
+/* Mobile menu panel */
+.mobile-menu {
+position: fixed; inset: 0; z-index: 55; background: var(--black);
+display: flex; flex-direction: column; justify-content: center; gap: 1.4rem;
+padding: 6rem var(--pad) 3rem; transform: translateY(-100%);
+transition: transform .45s cubic-bezier(.2,.8,.2,1); visibility: hidden;
+}
+.mobile-menu.open { transform: translateY(0); visibility: visible; }
+.mobile-menu a { font-size: 1.5rem; font-weight: 700; color: var(--white); border-bottom: 1px solid var(--line-soft); padding-bottom: 1rem; }
+.mm-close { position: absolute; top: 22px; inset-inline-end: var(--pad); background: none; border: none; color: var(--white); font-size: 2rem; cursor: pointer; }
+
+/* ==========================================================
+3. HERO
+========================================================== */
+.hero {
+min-height: 100vh; display: flex; align-items: center;
+padding: calc(var(--nav-h) + 4rem) 0 5rem;
+background: radial-gradient(70% 80% at 78% 30%, var(--red-faint), transparent 68%);
+overflow: hidden;
+}
+[dir="rtl"] .hero { background: radial-gradient(70% 80% at 22% 30%, var(--red-faint), transparent 68%); }
+.hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.hero h1 {
+font-size: clamp(2.4rem, 5.2vw, 4.4rem); color: var(--white);
+line-height: 1.05; letter-spacing: -.03em; margin-top: 1.4rem;
+}
+.hero h1 em { font-style: normal; color: var(--red); }
+.hero p.lede { margin-top: 1.6rem; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: var(--muted); max-width: 52ch; line-height: 1.8; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.3rem; }
+.hero-note { margin-top: 1.1rem; font-size: .88rem; color: var(--dim); max-width: 46ch; }
+.hero-note b { color: var(--muted); font-weight: 600; }
+
+/* Hero visual: abstract growth-system diagram */
+.hero-visual { position: relative; aspect-ratio: 1/1; width: 100%; max-width: 460px; margin-inline: auto; }
+.hv-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid var(--line); }
+.hv-ring.r2 { inset: 14%; border-color: var(--line-soft); border-style: dashed; animation: spinSlow 40s linear infinite; }
+.hv-ring.r3 { inset: 28%; border-color: var(--red-faint); }
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.hv-core {
+position: absolute; inset: 38%; border-radius: 50%; background: var(--black);
+border: 1.5px solid var(--red); display: grid; place-items: center; text-align: center;
+box-shadow: 0 0 50px var(--red-glow), inset 0 0 24px rgba(255,0,0,.08);
+animation: breathe 4.5s ease-in-out infinite;
+}
+@keyframes breathe { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.03);} }
+.hv-core .wordmark { font-size: 1.5rem; }
+.hv-core small { display:block; font-family: var(--font-en); font-size:.55rem; letter-spacing:.2em; color: var(--muted); text-transform: uppercase; margin-top:.3rem;}
+.hv-node { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: var(--white); box-shadow: 0 0 14px var(--red); }
+.hv-node.n1 { top: 0; left: 50%; transform: translate(-50%,-50%); }
+.hv-node.n2 { bottom: 12%; right: 6%; }
+.hv-node.n3 { bottom: 12%; left: 6%; }
+.hv-label { position:absolute; font-family: var(--font-en); font-size:.62rem; letter-spacing:.12em; color: var(--muted); text-transform: uppercase; }
+.hv-label.l1 { top:-1.6rem; left:50%; transform:translateX(-50%); }
+.hv-label.l2 { bottom:8%; right:-1.5rem; }
+.hv-label.l3 { bottom:8%; left:-1.5rem; }
+
+/* ==========================================================
+4. WHO WE ARE
+========================================================== */
+.block { padding: clamp(4.5rem, 9vw, 8rem) 0; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.statement {
+font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 800; color: var(--white);
+line-height: 1.2; letter-spacing: -.02em; margin-top: 2rem;
+padding-top: 2rem; border-top: 1px solid var(--line);
+}
+.statement .accent { color: var(--red); }
+.prose p { color: var(--muted); font-size: 1.05rem; line-height: 1.9; margin-bottom: 1.3rem; max-width: 52ch; }
+.prose p:last-child { margin-bottom: 0; }
+
+/* ==========================================================
+5. APPROACH STEPS
+========================================================== */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); margin-top: 3rem; }
+.step { background: var(--black); padding: 2.2rem 1.6rem; transition: background .3s ease; }
+.step:hover { background: var(--surface); }
+.step .num { font-family: var(--font-en); font-size: .8rem; font-weight: 700; letter-spacing: .12em; color: var(--red); }
+.step h3 { font-size: 1.15rem; color: var(--white); margin: 1rem 0 .7rem; }
+.step p { font-size: .92rem; color: var(--muted); line-height: 1.7; }
+
+/* ==========================================================
+6. SOLUTIONS
+========================================================== */
+.cat { padding: clamp(3rem, 6vw, 5rem) 0; border-top: 1px solid var(--line-soft); }
+.cat-head { display: flex; align-items: baseline; gap: 1.2rem; flex-wrap: wrap; }
+.cat-num { font-family: var(--font-en); font-size: .8rem; font-weight: 700; letter-spacing: .14em; color: var(--muted); }
+.cat-title { font-size: clamp(1.5rem, 2.6vw, 2.1rem); color: var(--white); }
+.cat-desc { color: var(--muted); max-width: 60ch; margin-top: .8rem; font-size: 1.02rem; line-height: 1.8; }
+
+.sol-list { margin-top: 2.4rem; display: grid; gap: .8rem; }
+.sol-row {
+display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem;
+padding: 1.4rem 1.6rem; background: var(--surface); border: 1px solid var(--line-soft);
+border-radius: 14px; transition: border-color .3s ease, transform .3s ease, background .3s ease;
+}
+.sol-row:hover { border-color: var(--red-faint); transform: translateY(-2px); background: var(--surface-2); }
+.sol-name { font-family: var(--font-en); font-size: 1.08rem; font-weight: 600; color: var(--white); letter-spacing: -.01em; }
+.sol-sub { font-size: .9rem; color: var(--muted); margin-top: .35rem; }
+.book-link {
+font-family: var(--font-en); font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+text-transform: uppercase; color: var(--muted); white-space: nowrap;
+display: inline-flex; align-items: center; gap: .5rem; transition: color .25s;
+}
+.book-link:hover { color: var(--red); }
+
+/* ==========================================================
+7. FREE DISCOVERY CALL (FEATURED)
+========================================================== */
+.discovery {
+padding: clamp(4rem, 8vw, 7rem) 0;
+background: radial-gradient(80% 120% at 50% 0%, var(--red-glow), transparent 70%);
+border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft);
+}
+.disc-card {
+max-width: 820px; margin: 0 auto; text-align: center;
+padding: clamp(2.5rem, 5vw, 4rem); background: var(--surface);
+border: 1px solid var(--line); border-radius: 24px;
+box-shadow: 0 30px 80px -30px rgba(0,0,0,.7);
+}
+.disc-card h2 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-top: 1.2rem; }
+.big-statement { font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 700; color: var(--white); margin-top: 1.4rem; line-height: 1.35; }
+.big-statement .free-word { color: var(--red); }
+.disc-card p.copy { color: var(--muted); font-size: 1.05rem; line-height: 1.85; margin-top: 1.3rem; max-width: 60ch; margin-inline: auto; }
+.disc-cta { margin-top: 2.4rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.disc-cta .btn { font-size: 1.05rem; padding: 1.15rem 2.4rem; }
+.disc-reassure { font-size: .92rem; color: var(--dim); line-height: 1.7; }
+.disc-reassure .lead { color: var(--muted); }
+
+/* ==========================================================
+8. AFTER THE CALL
+========================================================== */
+.after-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; margin-top: 3rem; }
+.after-card { padding: 2rem 1.5rem; border: 1px solid var(--line-soft); border-radius: 16px; background: var(--surface); transition: border-color .3s ease; }
+.after-card:hover { border-color: var(--red-faint); }
+.after-card .num { font-family: var(--font-en); font-size: 2.2rem; font-weight: 800; color: var(--line); line-height: 1; }
+.after-card:hover .num { color: var(--red-faint); }
+.after-card h3 { font-size: 1.1rem; color: var(--white); margin: 1.2rem 0 .6rem; }
+.after-card p { font-size: .92rem; color: var(--muted); line-height: 1.7; }
+.after-note { margin-top: 2rem; font-size: .88rem; color: var(--dim); text-align: center; }
+
+/* ==========================================================
+9. WHY SCALEO
+========================================================== */
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+.why-item { border-top: 1px solid var(--line); padding-top: 1.8rem; }
+.why-item .kicker { font-family: var(--font-en); font-size: .78rem; font-weight: 700; letter-spacing: .14em; color: var(--red); text-transform: uppercase; }
+.why-item h3 { font-size: 1.4rem; color: var(--white); margin: 1rem 0 .7rem; }
+.why-item p { color: var(--muted); font-size: 1rem; line-height: 1.8; }
+
+/* ==========================================================
+10. FINAL CTA
+========================================================== */
+.final {
+padding: clamp(5rem, 10vw, 9rem) 0; text-align: center;
+background: radial-gradient(60% 90% at 50% 100%, var(--red-faint), transparent 70%);
+}
+.final h2 { font-size: clamp(2rem, 4.5vw, 3.6rem); color: var(--white); max-width: 20ch; margin: 1.2rem auto 0; }
+.final p.sub { color: var(--muted); font-size: 1.1rem; margin-top: 1.4rem; max-width: 52ch; margin-inline: auto; line-height: 1.8; }
+.final .disc-cta { margin-top: 2.6rem; }
+.final .alt-line { margin-top: 1.6rem; font-size: .92rem; color: var(--dim); }
+.final .alt-line a { color: var(--muted); border-bottom: 1px solid var(--line); transition: color .25s, border-color .25s; }
+.final .alt-line a:hover { color: var(--white); border-color: var(--white); }
+
+/* ==========================================================
+11. FOOTER
+========================================================== */
+.footer { border-top: 1px solid var(--line-soft); padding: clamp(3.5rem,7vw,5rem) 0 2rem; background: var(--black); }
+.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2.5rem; }
+.foot-brand .wordmark { font-size: 1.9rem; }
+.foot-brand p { color: var(--muted); margin-top: 1rem; max-width: 30ch; font-size: .95rem; }
+.foot-mainlink { display:inline-flex; align-items:center; gap:.5rem; margin-top:1.4rem; font-family: var(--font-en); font-size:.85rem; font-weight:600; color: var(--white); border:1px solid var(--line); padding:.6rem 1.1rem; border-radius:999px; transition: border-color .25s, background .25s; }
+.foot-mainlink:hover { border-color: var(--red); background: var(--red-faint); }
+.foot-col h4 { font-family: var(--font-en); font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); margin-bottom: 1.3rem; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .85rem; }
+.foot-col a { color: var(--muted); font-size: .92rem; transition: color .25s, transform .25s; display: inline-block; }
+.foot-col a:hover { color: var(--white); transform: translateX(4px); }
+[dir="rtl"] .foot-col a:hover { transform: translateX(-4px); }
+.foot-bottom { max-width: var(--maxw); margin: 3.5rem auto 0; padding: 1.8rem var(--pad) 0; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: .82rem; color: var(--dim); flex-wrap: wrap; }
+.foot-bottom .legal { display: flex; gap: 1.5rem; }
+.foot-bottom .legal a { color: var(--dim); transition: color .25s; }
+.foot-bottom .legal a:hover { color: var(--white); }
+
+/* ==========================================================
+12. REVEAL ANIMATION
+========================================================== */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in-view { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .08s; }
+.reveal.d2 { transition-delay: .16s; }
+.reveal.d3 { transition-delay: .24s; }
+
+/* ==========================================================
+13. RESPONSIVE
+========================================================== */
+@media (max-width: 980px) {
+.nav-links { display: none; }
+.burger { display: inline-flex; }
+.hero-grid { grid-template-columns: 1fr; }
+.hero-visual { order: -1; max-width: 340px; }
+.split { grid-template-columns: 1fr; gap: 2rem; }
+.steps { grid-template-columns: repeat(2,1fr); }
+.after-grid { grid-template-columns: repeat(2,1fr); }
+.why-grid { grid-template-columns: 1fr; gap: 2rem; }
+.foot-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+.foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 620px) {
+.sol-row { grid-template-columns: 1fr; gap: 1rem; }
+.book-link { justify-self: start; }
+.steps { grid-template-columns: 1fr; }
+.after-grid { grid-template-columns: 1fr; }
+.hero-ctas .btn { flex: 1 1 100%; justify-content: center; }
+.foot-grid { grid-template-columns: 1fr; }
+.cat-head { gap: .5rem; }
+.brand-tag { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+html { scroll-behavior: auto; }
+.reveal { opacity: 1 !important; transform: none !important; transition: none; }
+.hv-ring.r2, .hv-core { animation: none !important; }
+.btn, .sol-row, .step, .after-card, .book-link, .arrow { transition: none !important; }
+}
+/* ==========================================================
+   6b. SOLUTIONS ACCORDION
+   ========================================================== */
+.sol-accordion { margin-top: 2.4rem; display: flex; flex-direction: column; gap: .8rem; }
+.acc-card {
+  background: var(--surface); border: 1px solid var(--line-soft);
+  border-radius: 16px; overflow: hidden; transition: border-color .3s ease, background .3s ease;
+}
+.acc-card.open { border-color: var(--red-faint); background: var(--surface-2); }
+
+.acc-head {
+  width: 100%; text-align: start; cursor: pointer; background: none; border: none;
+  color: inherit; font-family: inherit;
+  padding: 1.6rem 1.8rem;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem;
+}
+.acc-meta { display: block; }
+.acc-head .cat-num { display: inline-block; margin-bottom: .5rem; }
+.acc-head .cat-title { display: block; font-size: clamp(1.3rem, 2vw, 1.7rem); color: var(--white); font-weight: 700; letter-spacing: -.01em; }
+.acc-head .cat-desc { display: block; margin-top: .5rem; color: var(--muted); font-size: .98rem; line-height: 1.7; max-width: 62ch; }
+
+/* Plus / Minus icon */
+.acc-icon {
+  position: relative; width: 34px; height: 34px; flex-shrink: 0;
+  border: 1px solid var(--line); border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: border-color .3s ease, transform .3s ease;
+}
+.acc-icon::before, .acc-icon::after {
+  content: ''; position: absolute; background: var(--muted);
+  transition: background .3s ease, transform .3s ease, opacity .3s ease;
+}
+.acc-icon::before { width: 14px; height: 1.5px; }
+.acc-icon::after  { width: 1.5px; height: 14px; }
+.acc-card.open .acc-icon { border-color: var(--red); }
+.acc-card.open .acc-icon::before { background: var(--red); }
+.acc-card.open .acc-icon::after  { background: var(--red); transform: rotate(90deg); opacity: 0; }
+
+/* Collapsible body */
+.acc-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .5s cubic-bezier(.2,.8,.2,1);
+}
+.acc-card.open .acc-body { max-height: 1600px; }
+.acc-inner { padding: 0 1.8rem 1.6rem; }
+.acc-inner .sol-list { margin-top: 0; }
+
+@media (max-width: 620px) {
+  .acc-head { grid-template-columns: 1fr auto; padding: 1.3rem 1.2rem; gap: 1rem; }
+  .acc-inner { padding: 0 1.2rem 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .acc-body, .acc-icon, .acc-icon::before, .acc-icon::after { transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<header class="nav" id="navbar">
+<a href="#top" class="brand" aria-label="SCALEO home">
+<span class="wordmark">scaleo<i>.</i></span>
+<span class="brand-tag" data-i18n="brand_tag"></span>
+</a>
+<nav class="nav-links" aria-label="Primary">
+<a href="#who" data-i18n="nav_who"></a>
+<a href="#approach" data-i18n="nav_approach"></a>
+<a href="#solutions" data-i18n="nav_solutions"></a>
+<a href="https://calendly.com/scaleobusiness/35min" target="_blank" rel="noopener noreferrer" data-i18n="nav_discovery"></a>
+</nav>
+<div class="nav-right">
+<!-- Language toggle -->
+<div class="lang-toggle" role="group" aria-label="Language selector">
+<button class="lang-opt" data-lang="en" aria-label="English">EN</button>
+<span class="lang-sep">/</span>
+<button class="lang-opt" data-lang="ar" aria-label="العربية">AR</button>
+</div>
+<a href="https://calendly.com/scaleobusiness/35min" target="_blank" rel="noopener noreferrer" class="nav-cta" data-i18n="nav_cta"></a>
+<button class="burger" id="burgerBtn" aria-label="Open menu" aria-expanded="false">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+</div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+<button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button>
+<a href="#who" data-i18n="nav_who"></a>
+<a href="#approach" data-i18n="nav_approach"></a>
+<a href="#solutions" data-i18n="nav_solutions"></a>
+<a href="https://calendly.com/scaleobusiness/35min" target="_blank" rel="noopener noreferrer" data-i18n="nav_discovery"></a>
+</div>
+
+<main>
+<!-- ========== SECTION 01 — HERO ========== -->
+<section class="hero" id="top">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<span class="eyebrow reveal" data-i18n-html="hero_eyebrow"></span>
+<h1 class="reveal d1" data-i18n-html="hero_title"></h1>
+<p class="lede reveal d2" data-i18n-html="hero_lede"></p>
+<div class="hero-ctas reveal d3">
+<a href="#solutions" class="btn btn-primary"><span data-i18n="hero_btn_explore"></span> <span class="arrow">&#8594;</span></a>
+<a href="https://calendly.com/scaleobusiness/35min" target="_blank" rel="noopener noreferrer" class="btn btn-free"><span class="tag-free" data-i18n="tag_free"></span> <span data-i18n="hero_btn_call"></span></a>
+</div>
+<p class="hero-note reveal d3" data-i18n-html="hero_note"></p>
+</div>
+<!-- Abstract growth-system visual -->
+<div class="hero-visual reveal d2" aria-hidden="true">
+  <div class="hv-ring"></div>
+  <div class="hv-ring r2"></div>
+  <div class="hv-ring r3"></div>
+  <div class="hv-node n1"></div>
+  <div class="hv-node n2"></div>
+  <div class="hv-node n3"></div>
+  <span class="hv-label l1">Acquisition</span>
+  <span class="hv-label l2">Sales</span>
+  <span class="hv-label l3">Retention</span>
+  <div class="hv-core">
+    <div>
+      <span class="wordmark">scaleo<i>.</i></span>
+      <small>Growth System</small>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- ========== SECTION 02 — WHO IS SCALEO ========== -->
+<section class="block" id="who">
+<div class="wrap split">
+<div class="reveal">
+<span class="eyebrow muted" data-i18n-html="who_eyebrow"></span>
+<h2 class="section-title" data-i18n-html="who_title"></h2>
+<div class="statement" data-i18n-html="who_statement"></div>
+</div>
+<div class="prose reveal d1" data-i18n-html="who_prose"></div>
+</div>
+</section>
+
+<!-- ========== SECTION 03 — OUR APPROACH ========== -->
+<section class="block" id="approach" style="background:var(--surface); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
+<div class="wrap">
+<div class="reveal" style="max-width:60ch;">
+<span class="eyebrow" data-i18n-html="appr_eyebrow"></span>
+<h2 class="section-title" data-i18n="appr_title"></h2>
+<p class="section-lede" data-i18n-html="appr_lede"></p>
+</div>
+<div class="steps reveal d1">
+<div class="step">
+<span class="num">01</span>
+<h3 data-i18n="appr_s1_t"></h3>
+<p data-i18n-html="appr_s1_p"></p>
+</div>
+<div class="step">
+<span class="num">02</span>
+<h3 data-i18n="appr_s2_t"></h3>
+<p data-i18n-html="appr_s2_p"></p>
+</div>
+<div class="step">
+<span class="num">03</span>
+<h3 data-i18n="appr_s3_t"></h3>
+<p data-i18n-html="appr_s3_p"></p>
+</div>
+<div class="step">
+<span class="num">04</span>
+<h3 data-i18n="appr_s4_t"></h3>
+<p data-i18n-html="appr_s4_p"></p>
+</div>
+</div>
+</div>
+</section>
+<!-- ========== SECTION 04 — EXPLORE OUR SOLUTIONS (ACCORDION) ========== -->
+<section class="block" id="solutions">
+  <div class="wrap reveal">
+    <span class="eyebrow" data-i18n-html="sol_eyebrow"></span>
+    <h2 class="section-title" data-i18n="sol_title"></h2>
+    <p class="section-lede" data-i18n-html="sol_lede"></p>
+  </div>
+
+  <div class="wrap sol-accordion reveal d1">
+
+    <!-- CATEGORY 01 -->
+    <article class="acc-card" data-cat="c1">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-meta">
+          <span class="cat-num" data-i18n="c1_num"></span>
+          <span class="cat-title" data-i18n="c1_title"></span>
+          <span class="cat-desc" data-i18n-html="c1_desc"></span>
+        </span>
+        <span class="acc-icon" aria-hidden="true"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <ul class="sol-list">
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i1_n"></div><div class="sol-sub" data-i18n="c1_i1_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i2_n"></div><div class="sol-sub" data-i18n="c1_i2_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i3_n"></div><div class="sol-sub" data-i18n="c1_i3_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i4_n"></div><div class="sol-sub" data-i18n="c1_i4_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i5_n"></div><div class="sol-sub" data-i18n="c1_i5_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c1_i6_n"></div><div class="sol-sub" data-i18n="c1_i6_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- CATEGORY 02 -->
+    <article class="acc-card" data-cat="c2">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-meta">
+          <span class="cat-num" data-i18n="c2_num"></span>
+          <span class="cat-title" data-i18n="c2_title"></span>
+          <span class="cat-desc" data-i18n-html="c2_desc"></span>
+        </span>
+        <span class="acc-icon" aria-hidden="true"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <ul class="sol-list">
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i1_n"></div><div class="sol-sub" data-i18n="c2_i1_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i2_n"></div><div class="sol-sub" data-i18n="c2_i2_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i3_n"></div><div class="sol-sub" data-i18n="c2_i3_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i4_n"></div><div class="sol-sub" data-i18n="c2_i4_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i5_n"></div><div class="sol-sub" data-i18n="c2_i5_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i6_n"></div><div class="sol-sub" data-i18n="c2_i6_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c2_i7_n"></div><div class="sol-sub" data-i18n="c2_i7_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- CATEGORY 03 -->
+    <article class="acc-card" data-cat="c3">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-meta">
+          <span class="cat-num" data-i18n="c3_num"></span>
+          <span class="cat-title" data-i18n="c3_title"></span>
+          <span class="cat-desc" data-i18n-html="c3_desc"></span>
+        </span>
+        <span class="acc-icon" aria-hidden="true"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <ul class="sol-list">
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i1_n"></div><div class="sol-sub" data-i18n="c3_i1_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i2_n"></div><div class="sol-sub" data-i18n="c3_i2_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i3_n"></div><div class="sol-sub" data-i18n="c3_i3_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i4_n"></div><div class="sol-sub" data-i18n="c3_i4_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i5_n"></div><div class="sol-sub" data-i18n="c3_i5_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c3_i6_n"></div><div class="sol-sub" data-i18n="c3_i6_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- CATEGORY 04 -->
+    <article class="acc-card" data-cat="c4">
+      <button class="acc-head" type="button" aria-expanded="false">
+        <span class="acc-meta">
+          <span class="cat-num" data-i18n="c4_num"></span>
+          <span class="cat-title" data-i18n="c4_title"></span>
+          <span class="cat-desc" data-i18n-html="c4_desc"></span>
+        </span>
+        <span class="acc-icon" aria-hidden="true"></span>
+      </button>
+      <div class="acc-body">
+        <div class="acc-inner">
+          <ul class="sol-list">
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i1_n"></div><div class="sol-sub" data-i18n="c4_i1_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i2_n"></div><div class="sol-sub" data-i18n="c4_i2_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i3_n"></div><div class="sol-sub" data-i18n="c4_i3_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i4_n"></div><div class="sol-sub" data-i18n="c4_i4_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i5_n"></div><div class="sol-sub" data-i18n="c4_i5_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i6_n"></div><div class="sol-sub" data-i18n="c4_i6_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i7_n"></div><div class="sol-sub" data-i18n="c4_i7_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+            <li class="sol-row"><div><div class="sol-name" data-i18n="c4_i8_n"></div><div class="sol-sub" data-i18n="c4_i8_d"></div></div><a href="https://calendly.com/scaleobusiness/35min" class="book-link" target="_blank" rel="noopener noreferrer"><span data-i18n="book_call"></span> <span class="arrow">&#8594;</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ========== SECTION 05 — FREE DISCOVERY CALL ========== -->
+<section class="discovery" id="discovery-call">
+<div class="wrap">
+<div class="disc-card reveal">
+<span class="eyebrow" data-i18n-html="disc_eyebrow"></span>
+<h2 data-i18n="disc_title"></h2>
+<p class="big-statement" data-i18n-html="disc_statement"></p>
+<p class="copy" data-i18n-html="disc_copy1"></p>
+<p class="copy" data-i18n-html="disc_copy2"></p>
+<div class="disc-cta">
+<a href="#final-cta" class="btn btn-free"><span class="tag-free" data-i18n="tag_free"></span> <span data-i18n="disc_btn"></span> <span class="arrow">&#8594;</span></a>
+<p class="disc-reassure" data-i18n-html="disc_reassure"></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ========== SECTION 06 — WHAT HAPPENS AFTER THE CALL ========== -->
+<section class="block" id="after">
+<div class="wrap">
+<div class="reveal" style="max-width:60ch;">
+<span class="eyebrow muted" data-i18n-html="after_eyebrow"></span>
+<h2 class="section-title" data-i18n="after_title"></h2>
+</div>
+<div class="after-grid reveal d1">
+<div class="after-card">
+<div class="num">01</div>
+<h3 data-i18n="after_a1_t"></h3>
+<p data-i18n-html="after_a1_p"></p>
+</div>
+<div class="after-card">
+<div class="num">02</div>
+<h3 data-i18n="after_a2_t"></h3>
+<p data-i18n-html="after_a2_p"></p>
+</div>
+<div class="after-card">
+<div class="num">03</div>
+<h3 data-i18n="after_a3_t"></h3>
+<p data-i18n-html="after_a3_p"></p>
+</div>
+<div class="after-card">
+<div class="num">04</div>
+<h3 data-i18n="after_a4_t"></h3>
+<p data-i18n-html="after_a4_p"></p>
+</div>
+</div>
+<p class="after-note reveal d2" data-i18n-html="after_note"></p>
+</div>
+</section>
+
+<!-- ========== SECTION 07 — WHY SCALEO ========== -->
+<section class="block" id="why" style="background:var(--surface); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);">
+<div class="wrap">
+<div class="reveal" style="max-width:60ch;">
+<span class="eyebrow" data-i18n-html="why_eyebrow"></span>
+<h2 class="section-title" data-i18n="why_title"></h2>
+</div>
+<div class="why-grid reveal d1">
+<div class="why-item">
+<span class="kicker" data-i18n="why_k1"></span>
+<h3 data-i18n="why_h1"></h3>
+<p data-i18n-html="why_p1"></p>
+</div>
+<div class="why-item">
+<span class="kicker" data-i18n="why_k2"></span>
+<h3 data-i18n="why_h2"></h3>
+<p data-i18n-html="why_p2"></p>
+</div>
+<div class="why-item">
+<span class="kicker" data-i18n="why_k3"></span>
+<h3 data-i18n="why_h3"></h3>
+<p data-i18n-html="why_p3"></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ========== SECTION 08 — FINAL CTA ========== -->
+<section class="final" id="final-cta">
+<div class="wrap">
+<div class="reveal">
+<span class="eyebrow" style="justify-content:center;" data-i18n="final_eyebrow"></span>
+<h2 data-i18n-html="final_title"></h2>
+<p class="sub" data-i18n-html="final_sub"></p>
+<div class="disc-cta">
+<a href="https://calendly.com/scaleobusiness/35min" target="_blank" rel="noopener noreferrer" class="btn btn-free"><span class="tag-free" data-i18n="tag_free"></span> <span data-i18n="final_btn"></span> <span class="arrow">&#8594;</span></a>
+<p class="alt-line" data-i18n-html="final_alt"></p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ========== SECTION 09 — FOOTER ========== -->
+<footer class="footer">
+<div class="wrap foot-grid">
+<div class="foot-brand">
+<span class="wordmark">scaleo<i>.</i></span>
+<p data-i18n="foot_tagline"></p>
+<a href="https://scaleo-website.vercel.app/index.html" target="_blank" rel="noopener noreferrer" class="foot-mainlink"><span data-i18n="foot_mainlink"></span> <span class="arrow">&#8594;</span></a>
+</div>
+<div class="foot-col">
+<h4 data-i18n="foot_col_sol"></h4>
+<ul>
+<li><a href="#solutions" data-i18n="foot_sol_1"></a></li>
+<li><a href="#solutions" data-i18n="foot_sol_2"></a></li>
+<li><a href="#solutions" data-i18n="foot_sol_3"></a></li>
+<li><a href="#solutions" data-i18n="foot_sol_4"></a></li>
+</ul>
+</div>
+<div class="foot-col">
+<h4 data-i18n="foot_col_co"></h4>
+<ul>
+<li><a href="https://scaleo-website.vercel.app/about.html" target="_blank" rel="noopener noreferrer" data-i18n="foot_co_about"></a></li>
+<li><a href="https://scaleo-website.vercel.app/index.html" target="_blank" rel="noopener noreferrer" data-i18n="foot_co_main"></a></li>
+<li><a href="mailto:scaleobusiness@gmail.com" data-i18n="foot_co_contact"></a></li>
+</ul>
+</div>
+<div class="foot-col">
+<h4 data-i18n="foot_col_conn"></h4>
+<ul>
+<li><a href="https://www.linkedin.com/company/scaleocompany/about/?viewAsMember=true" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+<li><a href="https://www.instagram.com/scaleocompany/?hl=en" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+<li><a href="https://www.facebook.com/profile.php?id=61594946612128" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+<li><a href="mailto:scaleobusiness@gmail.com" data-i18n="foot_email"></a></li>
+</ul>
+</div>
+</div>
+<div class="foot-bottom">
+<div data-i18n="foot_copyright"></div>
+<div class="legal">
+<a href="#" data-i18n="foot_privacy"></a>
+<a href="#" data-i18n="foot_terms"></a>
+</div>
+</div>
+</footer>
+</main>
+
+<script>
+/* ==========================================================
+TRANSLATION DICTIONARY (EN default · AR = natural Egyptian)
+Keys map to data-i18n / data-i18n-html attributes.
+========================================================== */
+const I18N = {
+en: {
+// Nav
+brand_tag: "Solutions",
+nav_who: "Who We Are",
+nav_approach: "Approach",
+nav_solutions: "Solutions",
+nav_discovery: "Discovery Call",
+nav_cta: "Book a Free Call",
+tag_free: "FREE",
+book_call: "Book a Call",
+
+// Hero
+hero_eyebrow: "SCALEO&nbsp;/&nbsp;SOLUTIONS",
+hero_title: 'Growth solutions built<br>around your <em>business.</em>',
+hero_lede: 'Every business faces different growth challenges. At SCALEO we understand your business, identify what\u2019s holding growth back, then build and implement the right solution.',
+hero_btn_explore: "Explore Solutions",
+hero_btn_call: "Book a Discovery Call",
+hero_note: 'Not sure what the right solution is? No problem \u2014 that\u2019s exactly what the <b>Discovery Call</b> is for. We find the path.',
+
+// Who
+who_eyebrow: "01&nbsp;/&nbsp;WHO WE ARE",
+who_title: "We don\u2019t start with a service.<br>We start with the business.",
+who_statement: 'We build the system behind your <span class="accent">growth.</span>',
+who_prose: '<p>At SCALEO, we never assume every business needs the same fix.</p><p>We start by understanding the business \u2014 its goals, its customers, and what\u2019s happening right now.</p><p>Then we pinpoint the real problem or opportunity, and build the solution the business actually needs \u2014 not a template we try to force onto everyone.</p>',
+
+// Approach
+appr_eyebrow: "02&nbsp;/&nbsp;OUR APPROACH",
+appr_title: "From problem to solution.",
+appr_lede: "Four clear steps we take with you before touching any operating system.",
+appr_s1_t: "UNDERSTAND",
+appr_s1_p: 'We understand your business, your goals, and your current <span class="en">growth model</span>.',
+appr_s2_t: "IDENTIFY",
+appr_s2_p: 'We locate the <span class="en">bottleneck</span> or the opportunity that can genuinely move growth.',
+appr_s3_t: "RECOMMEND",
+appr_s3_p: 'We define the solution \u2014 or set of solutions \u2014 that fit your business.',
+appr_s4_t: "BUILD &amp; IMPLEMENT",
+appr_s4_p: "We turn the recommendation into a real system that gets built, launched, and run.",
+
+// Solutions intro
+sol_eyebrow: "03&nbsp;/&nbsp;SOLUTIONS",
+sol_title: "What can SCALEO help you with?",
+sol_lede: 'Not every business needs every solution. Pick the problem or the <span class="en">area</span> you feel needs improvement, and see how SCALEO can help.',
+
+// Category 01
+c1_num: "01 / ACQUISITION",
+c1_title: "Acquire More Customers",
+c1_desc: 'Grow demand and reach new customers through acquisition channels that are built and measurable.',
+c1_i1_n: "Performance Marketing", c1_i1_d: "Measurable paid campaigns tied directly to results.",
+c1_i2_n: "Paid Advertising", c1_i2_d: "Meta · TikTok · Google · Paid Social, professionally managed.",
+c1_i3_n: "Lead Generation", c1_i3_d: "Systems that bring in qualified leads continuously.",
+c1_i4_n: "Customer Acquisition Systems", c1_i4_d: "End-to-end acquisition engines that keep running.",
+c1_i5_n: "New Acquisition Channels", c1_i5_d: "Test and open fresh channels for reaching buyers.",
+c1_i6_n: "Market Expansion", c1_i6_d: "Reach new markets or audience segments deliberately.",
+
+// Category 02
+c2_num: "02 / SALES & CONVERSION",
+c2_title: "Convert More Demand",
+c2_desc: 'Turn more leads and traffic into paying customers by improving the <span class="en">sales process</span> and the <span class="en">customer journey</span>.',
+c2_i1_n: "Sales Strategy", c2_i1_d: "A clear sales strategy built on your product and market.",
+c2_i2_n: "Sales Process Optimization", c2_i2_d: "Refine each step to cut leakage and lift close rates.",
+c2_i3_n: "Sales Funnel", c2_i3_d: "Build a funnel that moves attention into purchases.",
+c2_i4_n: "Lead Qualification", c2_i4_d: "Sort and qualify prospects before negotiation begins.",
+c2_i5_n: "CRM & Follow-up", c2_i5_d: "Organized follow-up so no opportunity slips away.",
+c2_i6_n: "Conversion Rate Optimization", c2_i6_d: "Lift conversion from visitors and prospects.",
+c2_i7_n: "Customer Journey Optimization", c2_i7_d: "Improve every touchpoint from first contact to purchase.",
+
+// Category 03
+c3_num: "03 / CUSTOMER SUPPORT & RETENTION",
+c3_title: "Serve & Retain Customers",
+c3_desc: "Improve customer experience, follow up better, and build systems that help you keep them.",
+c3_i1_n: "AI Customer Support", c3_i1_d: "An AI assistant that replies, follows up, and sells around the clock.",
+c3_i2_n: "Human Call Center", c3_i2_d: "A skilled human team for complex cases.",
+c3_i3_n: "AI + Human Support", c3_i3_d: "Blend AI speed with human accuracy when it matters.",
+c3_i4_n: "Customer Service Systems", c3_i4_d: "Structured support that raises quality and response time.",
+c3_i5_n: "Customer Experience", c3_i5_d: "Sharpen every moment between the customer and the business.",
+c3_i6_n: "Retention & Follow-up", c3_i6_d: "Follow-up and win-back programs that raise lifetime value.",
+
+// Category 04
+c4_num: "04 / STRATEGY & SCALE",
+c4_title: "Build & Scale",
+c4_desc: 'Understand growth opportunities, set priorities, and build systems that help the business grow in an organized way.',
+c4_i1_n: "Growth Strategy", c4_i1_d: "A clear growth plan grounded in your market data and numbers.",
+c4_i2_n: "Growth Audit", c4_i2_d: "A full diagnostic of your growth state and improvement levers.",
+c4_i3_n: "Growth Roadmap", c4_i3_d: "A phased, executable roadmap for growth.",
+c4_i4_n: "Revenue Growth", c4_i4_d: "Increase revenue by optimizing existing pathways.",
+c4_i5_n: "New Revenue Opportunities", c4_i5_d: "Uncover income sources you haven\u2019t tapped yet.",
+c4_i6_n: "New Sales Channels", c4_i6_d: "Open additional channels to widen reach and revenue.",
+c4_i7_n: "Market Expansion", c4_i7_d: "Deliberate geographic or sector expansion.",
+c4_i8_n: "Growth Systems", c4_i8_d: "Infrastructure for growth that runs and compounds over time.",
+
+// Discovery
+disc_eyebrow: "04&nbsp;/&nbsp;DON'T KNOW WHAT YOU NEED?",
+disc_title: "Don\u2019t know where the problem is?",
+disc_statement: 'You don\u2019t need to know the solution. <span class="free-word">We\u2019ll find it for you.</span>',
+disc_copy1: 'If you know your business needs to grow but aren\u2019t sure exactly what has to change \u2014 book a <span class="en">Free Growth Discovery Call</span>.',
+disc_copy2: 'On the call we\u2019ll understand your business, your goals, and the current situation, then identify what may be holding growth back or where the biggest opportunity lies. Once we see the full picture, we\u2019ll show you the solution \u2014 or solutions \u2014 we believe fit your business.',
+disc_btn: "BOOK A DISCOVERY CALL",
+disc_reassure: '<span class="lead">No commitment. Just a conversation about your growth.</span>',
+
+// After
+after_eyebrow: "05&nbsp;/&nbsp;THE DISCOVERY CALL",
+after_title: "What happens after you book?",
+after_a1_t: "Understand Your Business", after_a1_p: 'We grasp the business, the offer, the customers, and the goals.',
+after_a2_t: "Diagnose the Challenge", after_a2_p: 'We isolate the problem or bottleneck affecting growth.',
+after_a3_t: "Find the Right Solution", after_a3_p: "We determine the fitting solution or set of solutions.",
+after_a4_t: "Build & Implement", after_a4_p: "If there\u2019s agreement, we begin building and running it.",
+after_note: "The goal is that you leave the call with a clearer picture of your growth \u2014 whether or not we work together.",
+
+// Why
+why_eyebrow: "06&nbsp;/&nbsp;WHY SCALEO",
+why_title: "More than services.",
+why_k1: "01 / Business First", why_h1: "We start from the business", why_p1: 'We begin with the business and its problem \u2014 not a ready-made service we try to bolt onto everyone.',
+why_k2: "02 / Built Around You", why_h2: "The solution fits your need", why_p2: 'Every solution is shaped around the actual need of the business \u2014 not one uniform template.',
+why_k3: "03 / Strategy + Execution", why_h3: "We plan and we execute", why_p3: "We don\u2019t just tell you what to do \u2014 we build and run the solution with you until it works.",
+
+// Final CTA
+final_eyebrow: "LET'S TALK",
+final_title: "Ready to see what could move your business\u2019s growth?",
+final_sub: 'Book a <span class="en">Free Growth Discovery Call</span> and let the first step be us understanding your business.',
+final_btn: "BOOK A DISCOVERY CALL",
+final_alt: 'Already know what you need? <a href="#solutions">Explore our solutions above &#8594;</a>',
+
+// Footer
+foot_tagline: "We build the system behind your growth.",
+foot_mainlink: "Visit Main Website",
+foot_col_sol: "Solutions",
+foot_sol_1: "Acquisition", foot_sol_2: "Sales & Conversion", foot_sol_3: "Customer Support & Retention", foot_sol_4: "Strategy & Scale",
+foot_col_co: "Company",
+foot_co_about: "About", foot_co_main: "Main Website", foot_co_contact: "Contact",
+foot_col_conn: "Connect",
+foot_email: "Email",
+foot_copyright: "\u00A9 2026 SCALEO. All rights reserved.",
+foot_privacy: "Privacy Policy", foot_terms: "Terms of Service"
+},
+
+ar: {
+// Nav
+brand_tag: "الحلول",
+nav_who: "من نحن",
+nav_approach: "منهجيتنا",
+nav_solutions: "الحلول",
+nav_discovery: "مكالمة الاكتشاف",
+nav_cta: "احجز مكالمة مجانية",
+tag_free: "مجانية",
+book_call: "احجز مكالمة",
+
+// Hero
+hero_eyebrow: "SCALEO&nbsp;/&nbsp;الحلول",
+hero_title: 'حلول نمو مبنية على<br>الـ<span class="en">Business</span> بتاعك',
+hero_lede: 'كل <span class="en">Business</span> عنده تحديات مختلفة في النمو. إحنا بنفهم الـ<span class="en">Business</span> بتاعك، نحدد إيه اللي معطل النمو، وبعدها نبني وننفذ الحل المناسب.',
+hero_btn_explore: "استعرض الحلول",
+hero_btn_call: "احجز مكالمة اكتشاف",
+hero_note: 'مش عارف إيه الحل المناسب؟ مفيش مشكلة — ده بالضبط دور الـ<b class="en">Discovery Call</b>. إحنا اللي بنحدد الطريق.',
+
+// Who
+who_eyebrow: "01&nbsp;/&nbsp;من نحن",
+who_title: "مش بنبدأ بالـService.<br>بنبدأ بالـBusiness.",
+who_statement: 'إحنا بنبني النظام اللي ورا <span class="accent">نموك.</span>',
+who_prose: '<p>في SCALEO، مش بنفترض إن كل <span class="en">Business</span> محتاج نفس الحل.</p><p>بنبدأ بفهم الـ<span class="en">Business</span>، أهدافه، عملائه، واللي بيحصل حاليًا.</p><p>بعدها بنحدد فين المشكلة أو الفرصة الحقيقية، ونبني الحل اللي الـ<span class="en">Business</span> محتاجه فعلًا — مش قالب جاهز بنحاول نركّبه على الكل.</p>',
+
+// Approach
+appr_eyebrow: "02&nbsp;/&nbsp;منهجيتنا",
+appr_title: "من المشكلة للحل.",
+appr_lede: "أربع خطوات واضحة بنمشي فيها معاك قبل ما نلمس أي نظام تشغيل.",
+appr_s1_t: "نفهم UNDERSTAND",
+appr_s1_p: 'نفهم الـ<span class="en">Business</span> بتاعك، أهدافك، والـ<span class="en">growth model</span> الحالي.',
+appr_s2_t: "نحدد IDENTIFY",
+appr_s2_p: 'نحدد الـ<span class="en">bottleneck</span> أو الفرصة اللي ممكن تحرّك النمو فعليًا.',
+appr_s3_t: "نوصّي RECOMMEND",
+appr_s3_p: 'نحدد الحل أو مجموعة الحلول المناسبة للـ<span class="en">Business</span> بتاعك.',
+appr_s4_t: "نبني وننفذ BUILD &amp; IMPLEMENT",
+appr_s4_p: "نحوّل الحل من مجرد توصية لنظام فعلي يتم تنفيذه وتشغيله.",
+
+// Solutions intro
+sol_eyebrow: "03&nbsp;/&nbsp;الحلول",
+sol_title: "إيه اللي SCALEO تقدر تساعدك فيه؟",
+sol_lede: 'مش كل <span class="en">Business</span> محتاج كل الحلول. اختار المشكلة أو الـ<span class="en">area</span> اللي حاسس إنها محتاجة تحسين، وشوف إزاي SCALEO ممكن تساعد.',
+
+// Category 01
+c1_num: "01 / الاستقطاب",
+c1_title: "زوّد عدد العملاء",
+c1_desc: 'زوّد الـ<span class="en">demand</span> ووصل لعملاء جدد من خلال قنوات استقطاب مبنية وقابلة للقياس.',
+c1_i1_n: "Performance Marketing", c1_i1_d: "حملات مدفوعة مربوطة بنتائج قابلة للقياس.",
+c1_i2_n: "Paid Advertising", c1_i2_d: "Meta · TikTok · Google · Paid Social بإدارة احترافية.",
+c1_i3_n: "Lead Generation", c1_i3_d: "أنظمة تجيب leads مؤهلة بشكل مستمر.",
+c1_i4_n: "Customer Acquisition Systems", c1_i4_d: "بناء منظومة اكتساب عملاء متكاملة ومستمرة.",
+c1_i5_n: "New Acquisition Channels", c1_i5_d: "فتح واختبار قنوات جديدة للوصول.",
+c1_i6_n: "Market Expansion", c1_i6_d: "التوسع لأسواق أو شرائح جديدة.",
+
+// Category 02
+c2_num: "02 / المبيعات والتحويل",
+c2_title: "حوّل الطلب لعملاء",
+c2_desc: 'حوّل الـ<span class="en">leads</span> والـ<span class="en">traffic</span> لعملاء أكتر من خلال تحسين الـ<span class="en">sales process</span> والـ<span class="en">customer journey</span>.',
+c2_i1_n: "Sales Strategy", c2_i1_d: "استراتيجية بيع واضحة مبنية على منتجك وسوقك.",
+c2_i2_n: "Sales Process Optimization", c2_i2_d: "تحسين خطوات البيع لتقليل الفاقد ورفع الإغلاق.",
+c2_i3_n: "Sales Funnel", c2_i3_d: "بناء مسار بيع يحوّل الاهتمام لشراء.",
+c2_i4_n: "Lead Qualification", c2_i4_d: "فرز وتأهيل العملاء المحتملين قبل التفاوض.",
+c2_i5_n: "CRM & Follow-up", c2_i5_d: "متابعة منظمة لكل lead عشان مفيش فرصة تضيع.",
+c2_i6_n: "Conversion Rate Optimization", c2_i6_d: "رفع نسبة التحويل من زوار وعملاء محتملين.",
+c2_i7_n: "Customer Journey Optimization", c2_i7_d: "تحسين تجربة العميل من أول تواصل لحد الشراء.",
+
+// Category 03
+c3_num: "03 / الدعم والاحتفاظ بالعملاء",
+c3_title: "اخدم واحتفظ بالعملاء",
+c3_desc: "حسّن تجربة العملاء، تابعهم بشكل أفضل، وابني systems تساعدك تحافظ عليهم.",
+c3_i1_n: "AI Customer Support", c3_i1_d: "مساعد ذكاء اصطناعي بيرد ويتابع ويبيع على مدار الساعة.",
+c3_i2_n: "Human Call Center", c3_i2_d: "فريق بشري متخصص للتعامل مع الحالات المعقدة.",
+c3_i3_n: "AI + Human Support", c3_i3_d: "دمج الذكاء والبشر لسرعة ودقة في نفس الوقت.",
+c3_i4_n: "Customer Service Systems", c3_i4_d: "أنظمة دعم منظمة ترفع جودة الخدمة والاستجابة.",
+c3_i5_n: "Customer Experience", c3_i5_d: "تحسين كل نقطة تماس بين العميل والـBusiness.",
+c3_i6_n: "Retention & Follow-up", c3_i6_d: "برامج متابعة واسترجاع ترفع قيمة العميل مدى الحياة.",
+
+// Category 04
+c4_num: "04 / الاستراتيجية والتوسع",
+c4_title: "ابني وتوسّع",
+c4_desc: 'افهم فرص النمو، حدد الأولويات، وابني systems تساعد الـ<span class="en">Business</span> يكبر بشكل أكثر تنظيمًا.',
+c4_i1_n: "Growth Strategy", c4_i1_d: "خطة نمو واضحة مبنية على بيانات سوقك وأرقامك.",
+c4_i2_n: "Growth Audit", c4_i2_d: "تشخيص شامل لأوضاع النمو وفرص التحسين.",
+c4_i3_n: "Growth Roadmap", c4_i3_d: "خارطة طريق مرحلية للنمو قابل للتنفيذ.",
+c4_i4_n: "Revenue Growth", c4_i4_d: "زيادة الإيرادات عبر تحسين المسارات الحالية.",
+c4_i5_n: "New Revenue Opportunities", c4_i5_d: "كشف مصادر دخل جديدة لم تستغلها بعد.",
+c4_i6_n: "New Sales Channels", c4_i6_d: "فتح قنوات بيع إضافية توسّع الوصول والإيراد.",
+c4_i7_n: "Market Expansion", c4_i7_d: "التوسع الجغرافي أو القطاعي بشكل مدروس.",
+c4_i8_n: "Growth Systems", c4_i8_d: "بنية تحتية للنمو تشتغل وتتكبّر باستمرار.",
+
+// Discovery
+disc_eyebrow: "04&nbsp;/&nbsp;مش عارف إنت محتاج إيه؟",
+disc_title: "مش عارف المشكلة فين؟",
+disc_statement: 'مش لازم تكون عارف الحل. <span class="free-word">إحنا بنلاقيه ليك.</span>',
+disc_copy1: 'لو عارف إن الـ<span class="en">Business</span> محتاج ينمو، لكن مش عارف بالضبط إيه اللي محتاج يتغير — احجز معانا <span class="en">Free Growth Discovery Call</span>.',
+disc_copy2: 'في الـCall، هنفهم الـ<span class="en">Business</span> بتاعك، أهدافك، الوضع الحالي، ونحدد إيه اللي ممكن يكون معطل النمو أو فين أكبر فرصة. وبعد ما نفهم الصورة كاملة، هنوضحلك الحل أو الحلول اللي شايفين إنها مناسبة للـ<span class="en">Business</span> بتاعك.',
+disc_btn: "احجز مكالمة اكتشاف نمو مجانية",
+disc_reassure: '<span class="lead">من غير التزام — مجرد مكالمة نفهم فيها الـ<span class="en">Business</span> بتاعك ونحدد الطريق المناسب.</span>',
+
+// After
+after_eyebrow: "05&nbsp;/&nbsp;مكالمة الاكتشاف",
+after_title: "إيه اللي بيحصل بعد ما تحجز؟",
+after_a1_t: "نفهم البيزنس بتاعك", after_a1_p: 'نفهم الـ<span class="en">Business</span>، الـ<span class="en">offer</span>، العملاء، والأهداف.',
+after_a2_t: "نشخّص التحدي", after_a2_p: 'نحدد المشكلة أو الـ<span class="en">bottleneck</span> اللي بيأثر على النمو.',
+after_a3_t: "نلاقي الحل المناسب", after_a3_p: "نحدد الحل أو مجموعة الحلول المناسبة.",
+after_a4_t: "نبني وننفذ", after_a4_p: "لو حصل اتفاق، نبدأ في تنفيذ الحل وتشغيله.",
+after_note: "هدفنا إنك تخرج من المكالمة بصورة أوضح عن نموك — سواء اشتغلنا مع بعض أو لا.",
+
+// Why
+why_eyebrow: "06&nbsp;/&nbsp;ليه SCALEO",
+why_title: "مش مجرد Services.",
+why_k1: "01 / البيزنس الأول", why_h1: "بنبدأ من الـBusiness", why_p1: 'بنبدأ من الـ<span class="en">Business</span> ومشكلته، مش من Service جاهزة بنحاول نركّبها على الكل.',
+why_k2: "02 / مبني حولك", why_h2: "الحل بيتحدد حسب احتياجك", why_p2: 'كل حل بيتبني حول احتياج الـ<span class="en">Business</span> الفعلي — مش قالب موحّد.',
+why_k3: "03 / خطة وتنفيذ", why_h3: "بنخطط وننفذ معاك", why_p3: "مش بنقولك تعمل إيه وبس — بنبني وننفذ الحل معاك لحد ما يشتغل فعلاً.",
+
+// Final CTA
+final_eyebrow: "خلينا نتكلم",
+final_title: "جاهز تعرف إيه اللي ممكن يحرك نمو الـBusiness بتاعك؟",
+final_sub: 'احجز <span class="en">Free Growth Discovery Call</span> وخلّي أول خطوة إننا نفهم الـ<span class="en">Business</span> بتاعك.',
+final_btn: "احجز مكالمة اكتشاف نمو مجانية",
+final_alt: 'عارف إنت محتاج إيه بالظبط؟ <a href="#solutions">استعرض الحلول فوق &#8594;</a>',
+
+// Footer
+foot_tagline: "إحنا بنبني النظام اللي ورا نمو شركتك.",
+foot_mainlink: "زيارة الموقع الرئيسي",
+foot_col_sol: "الحلول",
+foot_sol_1: "الاستقطاب", foot_sol_2: "المبيعات والتحويل", foot_sol_3: "الدعم والاحتفاظ بالعملاء", foot_sol_4: "الاستراتيجية والتوسع",
+foot_col_co: "الشركة",
+foot_co_about: "عن الشركة", foot_co_main: "الموقع الرئيسي", foot_co_contact: "تواصل معنا",
+foot_col_conn: "تابعنا",
+foot_email: "البريد الإلكتروني",
+foot_copyright: "\u00A9 2026 SCALEO. جميع الحقوق محفوظة.",
+foot_privacy: "سياسة الخصوصية", foot_terms: "شروط الاستخدام"
+}
+};
+
+/* ==========================================================
+LANGUAGE ENGINE
+========================================================== */
+(function () {
+const STORAGE_KEY = "scaleo-lang";
+const root = document.documentElement;
+const opts = Array.from(document.querySelectorAll(".lang-opt"));
+
+function applyLang(lang) {
+const dict = I18N[lang] || I18N.en;
+
+// Text nodes (plain)
+document.querySelectorAll("[data-i18n]").forEach(el => {
+const key = el.getAttribute("data-i18n");
+if (dict[key] != null) el.textContent = stripTags(dict[key]);
+});
+
+// HTML nodes (support <span>, <em>, <b>, <a>, entities)
+document.querySelectorAll("[data-i18n-html]").forEach(el => {
+const key = el.getAttribute("data-i18n-html");
+if (dict[key] != null) el.innerHTML = dict[key];
+});
+
+// Document direction + lang
+root.setAttribute("lang", lang);
+root.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+
+// Active state on toggle
+opts.forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
+
+// Persist choice
+try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+}
+
+// Strip tags used only for plain-text targets (keeps output clean)
+function stripTags(html) {
+const tmp = document.createElement("div");
+tmp.innerHTML = html;
+return tmp.textContent || "";
+}
+
+// Wire toggle buttons
+opts.forEach(btn => {
+btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+});
+
+// Initial language from storage (default EN)
+let saved = "en";
+try { saved = localStorage.getItem(STORAGE_KEY) || "en"; } catch (e) {}
+if (saved !== "ar") saved = "en";
+applyLang(saved);
+})();
+
+/* ==========================================================
+NAVBAR SCROLL STATE
+========================================================== */
+(function () {
+const nav = document.getElementById("navbar");
+const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 40);
+onScroll();
+window.addEventListener("scroll", onScroll, { passive: true });
+})();
+
+/* ==========================================================
+MOBILE MENU
+========================================================== */
+(function () {
+const burger = document.getElementById("burgerBtn");
+const menu = document.getElementById("mobileMenu");
+const close = document.getElementById("mmClose");
+if (!burger || !menu) return;
+
+const openMenu = () => {
+menu.classList.add("open");
+menu.setAttribute("aria-hidden", "false");
+burger.setAttribute("aria-expanded", "true");
+document.body.style.overflow = "hidden";
+};
+const shutMenu = () => {
+menu.classList.remove("open");
+menu.setAttribute("aria-hidden", "true");
+burger.setAttribute("aria-expanded", "false");
+document.body.style.overflow = "";
+};
+
+burger.addEventListener("click", openMenu);
+close.addEventListener("click", shutMenu);
+menu.querySelectorAll("a").forEach(a => a.addEventListener("click", shutMenu));
+document.addEventListener("keydown", e => { if (e.key === "Escape") shutMenu(); });
+})();
+
+/* ==========================================================
+SCROLL REVEAL (IntersectionObserver)
+========================================================== */
+(function () {
+const els = document.querySelectorAll(".reveal");
+if (!("IntersectionObserver" in window)) {
+els.forEach(el => el.classList.add("in-view"));
+return;
+}
+const io = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add("in-view");
+io.unobserve(entry.target);
+}
+});
+}, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+els.forEach(el => io.observe(el));
+})();
+/* ==========================================================
+   SOLUTIONS ACCORDION (mutually exclusive open/close)
+   ========================================================== */
+(function () {
+  const cards = document.querySelectorAll(".acc-card");
+  if (!cards.length) return;
+
+  cards.forEach(card => {
+    const head = card.querySelector(".acc-head");
+    if (!head) return;
+
+    head.addEventListener("click", () => {
+      const isOpen = card.classList.contains("open");
+
+      // Close all others first (one-at-a-time behaviour)
+      cards.forEach(c => {
+        c.classList.remove("open");
+        const h = c.querySelector(".acc-head");
+        if (h) h.setAttribute("aria-expanded", "false");
+      });
+
+      // Toggle the clicked one
+      if (!isOpen) {
+        card.classList.add("open");
+        head.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
